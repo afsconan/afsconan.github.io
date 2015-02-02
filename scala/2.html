@@ -90,7 +90,7 @@ greetStrings(2) = "world!\n"
 for (i <- 0 to 2)  
 print(greetStrings(i))  //数组元素读取</code></pre>
 
-greetStrings(0) = "Hello"  //数组元素赋值
+注释1：greetStrings(0) = "Hello"  //数组元素赋值
 
 `Scala用小括号代替java的中括号，
 Scala里所以东西都是对象，数组也不例外。数组赋值其实也是一个方法完成的。`
@@ -100,19 +100,18 @@ Scala里所以东西都是对象，数组也不例外。数组赋值其实也是
 <pre><code>greetStrings.update(0, "Hello") </code></pre>
 当然你也直接这样写上面的赋值：
 
-Scala代码
 
 <pre><code>greetStrings.update(0, "Hello")    
 greetStrings.update(1, ", ")    
 greetStrings.update(2, "world!\n") </code></pre>
 
-print(greetStrings(i))   //数组元素读取  
+注释2：print(greetStrings(i))   //数组元素读取  
 为什么Scala不用中括号呢？是`因为Scala有一套通用规则，会把小括号转换成apply。`
 
 所以编译器会得到这样的代码：
 
 <pre><code>print(greetStrings.apply(i)) </code></pre> 
-如果不使用符号，我们的代码同样可以完成：
+综合以上：如果不使用符号，我们的代码同样可以完成：
 
 <pre><code>val greetStrings = new Array[String](3)    
     
@@ -122,13 +121,14 @@ greetStrings.update(2, "world!\n")
     
 for (i <- 0.to(2))    
   print(greetStrings.apply(i))   </code></pre>
-当方法参数只有一个的时候，可以不写括号和点，
+
+注释3:当方法参数只有一个的时候，可以不写括号和点，
 
 所以第一循环是这样写就够了：
-<pre><code>for (i <- 0 to 2) </code></pre>
+<pre><code>for (i <- 0 to 2)  </code></pre>
 to是0的一个方法，
 
-<pre><code>for (i <- 0.to(2)) </code></pre>
+<pre><code>for (i <- 0.to(2))</code></pre>
 <!-- markdown end -->
 </div>
 <div class="entry" id="main">
@@ -202,7 +202,7 @@ greetStrings(2) = "world!\n"
 for (i &lt;- 0 to 2)  
 print(greetStrings(i))  //数组元素读取</code></pre>
 
-<p>greetStrings(0) = "Hello"  //数组元素赋值</p>
+<p>注释1：greetStrings(0) = "Hello"  //数组元素赋值</p>
 
 <p><code>Scala用小括号代替java的中括号，
 Scala里所以东西都是对象，数组也不例外。数组赋值其实也是一个方法完成的。</code></p>
@@ -213,20 +213,18 @@ Scala里所以东西都是对象，数组也不例外。数组赋值其实也是
 
 <p>当然你也直接这样写上面的赋值：</p>
 
-<p>Scala代码</p>
-
 <pre><code>greetStrings.update(0, "Hello")    
 greetStrings.update(1, ", ")    
 greetStrings.update(2, "world!\n") </code></pre>
 
-<p>print(greetStrings(i))   //数组元素读取 <br>
+<p>注释2：print(greetStrings(i))   //数组元素读取 <br>
 为什么Scala不用中括号呢？是<code>因为Scala有一套通用规则，会把小括号转换成apply。</code></p>
 
 <p>所以编译器会得到这样的代码：</p>
 
 <pre><code>print(greetStrings.apply(i)) </code></pre> 
 
-<p>如果不使用符号，我们的代码同样可以完成：</p>
+<p>综合以上：如果不使用符号，我们的代码同样可以完成：</p>
 
 <pre><code>val greetStrings = new Array[String](3)    
 
@@ -237,15 +235,15 @@ greetStrings.update(2, "world!\n")
 for (i &lt;- 0.to(2))    
   print(greetStrings.apply(i))   </code></pre>
 
-<p>当方法参数只有一个的时候，可以不写括号和点，</p>
+<p>注释3:当方法参数只有一个的时候，可以不写括号和点，</p>
 
 <p>所以第一循环是这样写就够了：</p>
 
-<pre><code>for (i &lt;- 0 to 2) </code></pre>
+<pre><code>for (i &lt;- 0 to 2)  </code></pre>
 
 <p>to是0的一个方法，</p>
 
-<pre><code>for (i &lt;- 0.to(2)) </code></pre>
+<pre><code>for (i &lt;- 0.to(2))</code></pre>
 <!-- content end -->
 </div>
 <br>
