@@ -1,0 +1,587 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+第九步：使用Lists和Tuples
+
+An immutable, and therefore more functional-oriented, sequence of objects that share the same type is Scala's List.
+不可变，有同样类型的对象的序列为List。
+
+Scala's List, scala.List, differs from Java's java.util.List type in that Scala Lists are always immutable (whereas Java Lists can be mutable).
+But more importantly, Scala's List is designed to enable a functional style of programming.
+
+Creating a List：
+val oneTwoThree = List(1, 2, 3)
+
+(You don't need to say new List because “List” is defined as a factory method on the scala.List singleton object. More on Scala's singleton object construct in Step 11.)
+
+List has a method named ::: that concatenates a passed List and the List on which ::: was invoked.
+
+val oneTwo = List(1, 2)
+val threeFour = List(3, 4)
+val oneTwoThreeFour = oneTwo ::: threeFour
+println(oneTwo + " and " + threeFour + " were not mutated.")
+println("Thus, " + oneTwoThreeFour + " is a new List.")
+
+::操作符添加一个新元素在已存在的List的开头。
+val twoThree = List(2, 3)
+val oneTwoThree = 1 :: twoThree
+println(oneTwoThree)
+
+one way to initialize new Lists is to string together elements with the cons operator, with Nil as the last element
+val oneTwoThree = 1 :: 2 :: 3 :: Nil
+println(oneTwoThree)
+
+
+Table 1. Some List methods and usages.
+
+----
+tuples are immutable, but unlike Lists, tuples can contain different types of elements.
+
+Thus whereas a list might be a List[Int] or a List[String], a tuple could contain both an Int and a String at the same time.
+
+Tuples are very useful, for example, if you need to return multiple objects from a method. Whereas in Java, you would often create a JavaBean-like class to hold the multiple return values, in Scala you can simply return a tuple.
+
+Once you have a tuple instantiated, you can access its elements individually with a dot, underscore, and the one-based index of the element.
+
+val pair = (99, "Luftballons")
+println(pair._1)
+println(pair._2)
+
+Scala infers the type of the tuple to be Tuple2[Int, String], and gives that type to the variable pair as well.
+
+第十步：使用Sets和Maps
+When it comes to Sets and Maps, Scala also provides mutable and immutable alternatives, but in a different way. For Sets and Maps, Scala models mutability in the class hierarchy.
+
+the Scala API contains a base trait for Sets, where a trait is similar to a Java interface. (You'll find out more about traits in Step 12.)
+
+Scala then provides two subtraits, one for mutable Sets, and another for immutable Sets. As you can see in Figure 2, these three traits all share the same simple name, Set. Their fully qualified names differ, however, because they each reside in a different package.
+
+图2 scala set的类等级
+
+Note that just as with Lists and Arrays, when you create a Set, you need to parameterize it with a type (in this case, String), since every object in a Set must share the same type.
+
+As with most other symbols you've seen that look like operators in Scala, += is actually a method defined on class HashSet. Had you wanted to, instead of writing jetSet += "Lear", you could have written jetSet.+=("Lear"). Because the += method takes a variable number of arguments, you can pass one or more objects at a time to it. For example, jetSet += "Lear" adds one String to the HashSet, but jetSet += ("Boeing", "Airbus") adds two Strings to the set.
+--------------
+Another useful collection class in Scala is Maps. As with Sets, Scala provides mutable and immutable versions of Map, using a class hierarchy.
+
+图3 scala map的类等级
+
+import scala.collection.mutable.HashMap
+
+val treasureMap = new HashMap[Int, String]
+treasureMap += 1 -> "Go to island."
+treasureMap += 2 -> "Find big X on ground."
+treasureMap += 3 -> "Dig."
+println(treasureMap(2))
+
+the Scala compiler transforms an binary operation expression like 1 -> "Go to island." into 1.->("Go to island.").
+-----------------------------
+val romanNumeral = Map(1 -> "I", 2 -> "II", 3 -> "III", 4 -> "IV", 5 -> "V")
+println(romanNumeral(4))
+
+the immutable Map trait is automatically imported into any Scala source file. Thus when you say Map in the first line of code, the Scala interpreter knows you mean scala.collection.immutable.Map.
+
+第十一步：理解classes和singleton objects
+classes in Scala encapsulate fields and methods. Fields are defined with either val or var. Methods are defined with def.
+
+class SimpleGreeter {
+  val greeting = "Hello, world!"
+  def greet() = println(greeting)
+}
+
+val g = new SimpleGreeter
+g.greet()
+
+尽管Scala和Java中的类很相似，但很多方面都不一样。
+首先，构造器。Java有构造函数，可以传参。而Scala可以直接用类传参。类的参数可以直接用在类里面，并且不需要定义field。
+class FancyGreeter(greeting: String) {
+  def greet() = println(greeting)
+}
+
+val g = new FancyGreeter("Salutations, world")
+g.greet
+
+直接在类名后的括号中放参数。
+
+if you wanted to check the String passed to FancyGreeter's primary constructor for null, and throw NullPointerException to abort the construction of the new instance？
+Any code sitting inside the curly braces surrounding the class definition, but which isn't part of a method definition, is compiled into the body of the primary constructor. 
+In essence, the primary constructor will first initialize what is essentially a final field for each parameter in parentheses following the class name. 
+It will then execute any top-level code contained in the class's body.
+
+class CarefulGreeter(greeting: String) {
+
+  if (greeting == null) {
+    throw new NullPointerException("greeting was null")
+  }
+
+  def greet() = println(greeting)
+}
+
+new CarefulGreeter(null)
+
+这里的if语句如果放在java中不会编译通过，但scala编译器会将这句原始构造器里面。
+
+Java允许多个构造函数，scala也可以，但必须选择一个作为原始构造函数，并且这个原始构造函数的参数直接写在类名后面。然后在类里面写其他辅助的构造函数，定义为方法this。
+
+class RepeatGreeter(greeting: String, count: Int) {
+
+  def this(greeting: String) = this(greeting, 1)
+
+  def greet() = {
+    for (i <- 1 to count)
+      println(greeting)
+  }
+}
+
+val g1 = new RepeatGreeter("Hello, world", 3)
+g1.greet()
+val g2 = new RepeatGreeter("Hi there!")
+g2.greet()
+
+
+java与scala的另一个不同，在一个scala中不能有任何静态变量或方法，可以通过object关键词创建一个单一对象（singleton objects）。一个单一对象（singleton objects）不需要用new初始化。它在第一次使用时自动初始化了，如名字所暗示，它只有一个实例。
+A singleton object can share the same name with a class, and when it does, the singleton is called the class's companion object. The Scala compiler transforms the fields and methods of a singleton object to static fields and methods of the resulting binary Java class.
+
+// In WorldlyGreeter.scala
+
+// The WorldlyGreeter class
+class WorldlyGreeter(greeting: String) {
+  def greet() = {
+    val worldlyGreeting = WorldlyGreeter.worldify(greeting)
+    println(worldlyGreeting)
+  }
+}
+
+// The WorldlyGreeter companion object
+object WorldlyGreeter {
+  def worldify(s: String) = s + ", world!"
+}
+
+Any static methods that you would have placed in class WorldlyGreeter in Java, you'd put in singleton object WorldlyGreeter in Scala.
+In fact, when the Scala compiler generates bytecodes for this file, it will create a Java class named WorldlyGreeter that has an instance method named greet (defined in the WorldlyGreeter class in the Scala source) and a static method named worldify (defined in the WorldlyGreeter companion object in Scala source).
+---
+To run this code, you'll need to create an application. Type the following code into a file named WorldlyApp.scala:
+
+// In WorldlyApp.scala
+// A singleton object with a main method that allows
+// this singleton object to be run as an application
+object WorldlyApp {
+  def main(args: Array[String]) {
+    val wg = new WorldlyGreeter("Hello")
+    wg.greet()
+  }
+}
+
+this singleton object is not a companion object. It is instead called a 【stand-alone. object】.
+【Thus, a singleton object is either a companion or a stand-alone object. 】The distinction is important because companion objects get a few special privileges, such as access to private members of the like-named class.
+
+scala中，文件名.scala和文件里面的类名可以毫无关系。在非脚本情况下，最好和java做法一样，程序员通过文件名容易定位到类。
+
+
+Neither WorldlyGreeter.scala nor WorldlyApp.scala are scripts, because they end in a definition. A script, by contrast, must end in a result expression. Thus if you try to run either of these files as a script, for example by typing:
+
+scala WorldlyGreeter.scala # This won't work!
+
+The Scala interpreter will complain that WorldlyGreeter.scala does not end in a result expression. Instead, you'll need to actually compile these files with the Scala compiler, then run the resulting class files. One way to do this is to use scalac, which is the basic Scala compiler. Simply type:
+
+scalac WorldlyApp.scala WorldlyGreeter.scala
+
+Given that the scalac compiler starts up a new JVM instance each time it is invoked, and that the JVM often has a perceptible start-up delay, the Scala distribution also includes a Scala compiler daemon called fsc (for fast Scala compiler). You use it like this:
+
+fsc WorldlyApp.scala WorldlyGreeter.scala
+
+
+The first time you run fsc, it will create a local server daemon attached to a port on your computer. It will then send the list of files to compile to the daemon via the port, and the daemon will compile the files. The next time you run fsc, the daemon will already be running, so fsc will simply send the file list to the daemon, which will immediately compile the files. Using fsc, you only need to wait for the the JVM to startup the first time. If you ever want to stop the fsc daemon, you can do so with fsc -shutdown.
+
+Running either of these scalac or fsc commands will produce Java class files that you can then run via the scala command, the same command you used to invoke the interpreter in previous examples. However, instead of giving it a filename with a .scala extension containing Scala code to interpret as you did in every previous example, in this case you'll give it the name of a class containing a main method. Similar to Java, any Scala class with a main method that takes a single parameter of type Array[String] and returns Unit can serve as the entry point to an application. In this example, WorldlyApp has a main method with the proper signature, so you can run this example by typing:
+
+scala WorldlyApp
+
+At which point you should see:
+
+Hello, world!
+
+
+第十二步：理解traits和mixins
+
+在第十步中提到，scala中有一个构造器（construct ）叫trait和java中的接口很像。区别，java接口定义是抽象的，但scala可以再traits中给出有真实代码的方法。
+Here's an example:
+
+trait Friendly {
+  def greet() = "Hi"
+}
+
+What is actually going on is that lacking an explicit return statement, Scala methods will return the value of the last expression. In this case, the value of the last expression is "Hi", so that is returned.
+
+详细的等价语句：
+
+trait Friendly {
+  def greet(): String = {
+    return "Hi"
+  }
+}
+
+In both Java and Scala, a class can 【extend】 one (and only one) other class.
+In Java, an interface can extend zero to many interfaces. Similarly in Scala, a trait can 【extend】 zero to many traits.
+In Java, a class can implement zero to many interfaces. Similarly in Scala, a class can 【extend】 zero to many traits. implements is not a keyword in Scala.
+
+class Dog extends Friendly {
+  override def greet() = "Woof"
+}
+
+In this example, class Dog extends trait Friendly. This inheritance relationship implies much the same thing as interface implementation does in Java. You can assign a Dog instance to a variable of type Friendly. For example:
+
+var pet: Friendly = new Dog
+println(pet.greet())
+与java不同，在scala中重载一个方法, 必须在方法的def前写上override.
+
+最后，java interface和scala traits的一个非常重要的区别, in Scala, you can mix in traits at instantiation time.
+
+trait ExclamatoryGreeter extends Friendly {
+  override def greet() = super.greet() + "!"
+}
+
+With this trait, you can mix in its behavior at instantiation time using the 【with】 keyword.【输出结果，疑问】
+
+val pup: Friendly = new Dog with ExclamatoryGreeter
+println(pup.greet())
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p>第九步：使用Lists和Tuples</p>
+
+<p>An immutable, and therefore more functional-oriented, sequence of objects that share the same type is Scala's List.
+不可变，有同样类型的对象的序列为List。</p>
+
+<p>Scala's List, scala.List, differs from Java's java.util.List type in that Scala Lists are always immutable (whereas Java Lists can be mutable).
+But more importantly, Scala's List is designed to enable a functional style of programming.</p>
+
+<p>Creating a List：
+val oneTwoThree = List(1, 2, 3)</p>
+
+<p>(You don't need to say new List because “List” is defined as a factory method on the scala.List singleton object. More on Scala's singleton object construct in Step 11.)</p>
+
+<p>List has a method named ::: that concatenates a passed List and the List on which ::: was invoked.</p>
+
+<p>val oneTwo = List(1, 2)
+val threeFour = List(3, 4)
+val oneTwoThreeFour = oneTwo ::: threeFour
+println(oneTwo + " and " + threeFour + " were not mutated.")
+println("Thus, " + oneTwoThreeFour + " is a new List.")</p>
+
+<p>::操作符添加一个新元素在已存在的List的开头。
+val twoThree = List(2, 3)
+val oneTwoThree = 1 :: twoThree
+println(oneTwoThree)</p>
+
+<p>one way to initialize new Lists is to string together elements with the cons operator, with Nil as the last element
+val oneTwoThree = 1 :: 2 :: 3 :: Nil
+println(oneTwoThree)</p>
+
+<p>Table 1. Some List methods and usages.</p>
+
+<hr>
+
+<p>tuples are immutable, but unlike Lists, tuples can contain different types of elements.</p>
+
+<p>Thus whereas a list might be a List[Int] or a List[String], a tuple could contain both an Int and a String at the same time.</p>
+
+<p>Tuples are very useful, for example, if you need to return multiple objects from a method. Whereas in Java, you would often create a JavaBean-like class to hold the multiple return values, in Scala you can simply return a tuple.</p>
+
+<p>Once you have a tuple instantiated, you can access its elements individually with a dot, underscore, and the one-based index of the element.</p>
+
+<p>val pair = (99, "Luftballons")
+println(pair.<em>1)
+println(pair.</em>2)</p>
+
+<p>Scala infers the type of the tuple to be Tuple2[Int, String], and gives that type to the variable pair as well.</p>
+
+<p>第十步：使用Sets和Maps
+When it comes to Sets and Maps, Scala also provides mutable and immutable alternatives, but in a different way. For Sets and Maps, Scala models mutability in the class hierarchy.</p>
+
+<p>the Scala API contains a base trait for Sets, where a trait is similar to a Java interface. (You'll find out more about traits in Step 12.)</p>
+
+<p>Scala then provides two subtraits, one for mutable Sets, and another for immutable Sets. As you can see in Figure 2, these three traits all share the same simple name, Set. Their fully qualified names differ, however, because they each reside in a different package.</p>
+
+<p>图2 scala set的类等级</p>
+
+<p>Note that just as with Lists and Arrays, when you create a Set, you need to parameterize it with a type (in this case, String), since every object in a Set must share the same type.</p>
+
+<h2 id="aswithmostothersymbolsyouveseenthatlooklikeoperatorsinscalaisactuallyamethoddefinedonclasshashsethadyouwantedtoinsteadofwritingjetsetlearyoucouldhavewrittenjetsetlearbecausethemethodtakesavariablenumberofargumentsyoucanpassoneormoreobjectsatatimetoitforexamplejetsetlearaddsonestringtothehashsetbutjetsetboeingairbusaddstwostringstotheset">As with most other symbols you've seen that look like operators in Scala, += is actually a method defined on class HashSet. Had you wanted to, instead of writing jetSet += "Lear", you could have written jetSet.+=("Lear"). Because the += method takes a variable number of arguments, you can pass one or more objects at a time to it. For example, jetSet += "Lear" adds one String to the HashSet, but jetSet += ("Boeing", "Airbus") adds two Strings to the set.</h2>
+
+<p>Another useful collection class in Scala is Maps. As with Sets, Scala provides mutable and immutable versions of Map, using a class hierarchy.</p>
+
+<p>图3 scala map的类等级</p>
+
+<p>import scala.collection.mutable.HashMap</p>
+
+<p>val treasureMap = new HashMap[Int, String]
+treasureMap += 1 -&gt; "Go to island."
+treasureMap += 2 -&gt; "Find big X on ground."
+treasureMap += 3 -&gt; "Dig."
+println(treasureMap(2))</p>
+
+<h2 id="thescalacompilertransformsanbinaryoperationexpressionlike1gotoislandinto1gotoisland">the Scala compiler transforms an binary operation expression like 1 -&gt; "Go to island." into 1.-&gt;("Go to island.").</h2>
+
+<p>val romanNumeral = Map(1 -&gt; "I", 2 -&gt; "II", 3 -&gt; "III", 4 -&gt; "IV", 5 -&gt; "V")
+println(romanNumeral(4))</p>
+
+<p>the immutable Map trait is automatically imported into any Scala source file. Thus when you say Map in the first line of code, the Scala interpreter knows you mean scala.collection.immutable.Map.</p>
+
+<p>第十一步：理解classes和singleton objects
+classes in Scala encapsulate fields and methods. Fields are defined with either val or var. Methods are defined with def.</p>
+
+<p>class SimpleGreeter {
+  val greeting = "Hello, world!"
+  def greet() = println(greeting)
+}</p>
+
+<p>val g = new SimpleGreeter
+g.greet()</p>
+
+<p>尽管Scala和Java中的类很相似，但很多方面都不一样。
+首先，构造器。Java有构造函数，可以传参。而Scala可以直接用类传参。类的参数可以直接用在类里面，并且不需要定义field。
+class FancyGreeter(greeting: String) {
+  def greet() = println(greeting)
+}</p>
+
+<p>val g = new FancyGreeter("Salutations, world")
+g.greet</p>
+
+<p>直接在类名后的括号中放参数。</p>
+
+<p>if you wanted to check the String passed to FancyGreeter's primary constructor for null, and throw NullPointerException to abort the construction of the new instance？
+Any code sitting inside the curly braces surrounding the class definition, but which isn't part of a method definition, is compiled into the body of the primary constructor. 
+In essence, the primary constructor will first initialize what is essentially a final field for each parameter in parentheses following the class name. 
+It will then execute any top-level code contained in the class's body.</p>
+
+<p>class CarefulGreeter(greeting: String) {</p>
+
+<p>if (greeting == null) {
+    throw new NullPointerException("greeting was null")
+  }</p>
+
+<p>def greet() = println(greeting)
+}</p>
+
+<p>new CarefulGreeter(null)</p>
+
+<p>这里的if语句如果放在java中不会编译通过，但scala编译器会将这句原始构造器里面。</p>
+
+<p>Java允许多个构造函数，scala也可以，但必须选择一个作为原始构造函数，并且这个原始构造函数的参数直接写在类名后面。然后在类里面写其他辅助的构造函数，定义为方法this。</p>
+
+<p>class RepeatGreeter(greeting: String, count: Int) {</p>
+
+<p>def this(greeting: String) = this(greeting, 1)</p>
+
+<p>def greet() = {
+    for (i &lt;- 1 to count)
+      println(greeting)
+  }
+}</p>
+
+<p>val g1 = new RepeatGreeter("Hello, world", 3)
+g1.greet()
+val g2 = new RepeatGreeter("Hi there!")
+g2.greet()</p>
+
+<p>java与scala的另一个不同，在一个scala中不能有任何静态变量或方法，可以通过object关键词创建一个单一对象（singleton objects）。一个单一对象（singleton objects）不需要用new初始化。它在第一次使用时自动初始化了，如名字所暗示，它只有一个实例。
+A singleton object can share the same name with a class, and when it does, the singleton is called the class's companion object. The Scala compiler transforms the fields and methods of a singleton object to static fields and methods of the resulting binary Java class.</p>
+
+<p>// In WorldlyGreeter.scala</p>
+
+<p>// The WorldlyGreeter class
+class WorldlyGreeter(greeting: String) {
+  def greet() = {
+    val worldlyGreeting = WorldlyGreeter.worldify(greeting)
+    println(worldlyGreeting)
+  }
+}</p>
+
+<p>// The WorldlyGreeter companion object
+object WorldlyGreeter {
+  def worldify(s: String) = s + ", world!"
+}</p>
+
+<p>Any static methods that you would have placed in class WorldlyGreeter in Java, you'd put in singleton object WorldlyGreeter in Scala.</p>
+
+<h2 id="infactwhenthescalacompilergeneratesbytecodesforthisfileitwillcreateajavaclassnamedworldlygreeterthathasaninstancemethodnamedgreetdefinedintheworldlygreeterclassinthescalasourceandastaticmethodnamedworldifydefinedintheworldlygreetercompanionobjectinscalasource">In fact, when the Scala compiler generates bytecodes for this file, it will create a Java class named WorldlyGreeter that has an instance method named greet (defined in the WorldlyGreeter class in the Scala source) and a static method named worldify (defined in the WorldlyGreeter companion object in Scala source).</h2>
+
+<p>To run this code, you'll need to create an application. Type the following code into a file named WorldlyApp.scala:</p>
+
+<p>// In WorldlyApp.scala
+// A singleton object with a main method that allows
+// this singleton object to be run as an application
+object WorldlyApp {
+  def main(args: Array[String]) {
+    val wg = new WorldlyGreeter("Hello")
+    wg.greet()
+  }
+}</p>
+
+<p>this singleton object is not a companion object. It is instead called a 【stand-alone. object】.
+【Thus, a singleton object is either a companion or a stand-alone object. 】The distinction is important because companion objects get a few special privileges, such as access to private members of the like-named class.</p>
+
+<p>scala中，文件名.scala和文件里面的类名可以毫无关系。在非脚本情况下，最好和java做法一样，程序员通过文件名容易定位到类。</p>
+
+<p>Neither WorldlyGreeter.scala nor WorldlyApp.scala are scripts, because they end in a definition. A script, by contrast, must end in a result expression. Thus if you try to run either of these files as a script, for example by typing:</p>
+
+<p>scala WorldlyGreeter.scala # This won't work!</p>
+
+<p>The Scala interpreter will complain that WorldlyGreeter.scala does not end in a result expression. Instead, you'll need to actually compile these files with the Scala compiler, then run the resulting class files. One way to do this is to use scalac, which is the basic Scala compiler. Simply type:</p>
+
+<p>scalac WorldlyApp.scala WorldlyGreeter.scala</p>
+
+<p>Given that the scalac compiler starts up a new JVM instance each time it is invoked, and that the JVM often has a perceptible start-up delay, the Scala distribution also includes a Scala compiler daemon called fsc (for fast Scala compiler). You use it like this:</p>
+
+<p>fsc WorldlyApp.scala WorldlyGreeter.scala</p>
+
+<p>The first time you run fsc, it will create a local server daemon attached to a port on your computer. It will then send the list of files to compile to the daemon via the port, and the daemon will compile the files. The next time you run fsc, the daemon will already be running, so fsc will simply send the file list to the daemon, which will immediately compile the files. Using fsc, you only need to wait for the the JVM to startup the first time. If you ever want to stop the fsc daemon, you can do so with fsc -shutdown.</p>
+
+<p>Running either of these scalac or fsc commands will produce Java class files that you can then run via the scala command, the same command you used to invoke the interpreter in previous examples. However, instead of giving it a filename with a .scala extension containing Scala code to interpret as you did in every previous example, in this case you'll give it the name of a class containing a main method. Similar to Java, any Scala class with a main method that takes a single parameter of type Array[String] and returns Unit can serve as the entry point to an application. In this example, WorldlyApp has a main method with the proper signature, so you can run this example by typing:</p>
+
+<p>scala WorldlyApp</p>
+
+<p>At which point you should see:</p>
+
+<p>Hello, world!</p>
+
+<p>第十二步：理解traits和mixins</p>
+
+<p>在第十步中提到，scala中有一个构造器（construct ）叫trait和java中的接口很像。区别，java接口定义是抽象的，但scala可以再traits中给出有真实代码的方法。
+Here's an example:</p>
+
+<p>trait Friendly {
+  def greet() = "Hi"
+}</p>
+
+<p>What is actually going on is that lacking an explicit return statement, Scala methods will return the value of the last expression. In this case, the value of the last expression is "Hi", so that is returned.</p>
+
+<p>详细的等价语句：</p>
+
+<p>trait Friendly {
+  def greet(): String = {
+    return "Hi"
+  }
+}</p>
+
+<p>In both Java and Scala, a class can 【extend】 one (and only one) other class.
+In Java, an interface can extend zero to many interfaces. Similarly in Scala, a trait can 【extend】 zero to many traits.
+In Java, a class can implement zero to many interfaces. Similarly in Scala, a class can 【extend】 zero to many traits. implements is not a keyword in Scala.</p>
+
+<p>class Dog extends Friendly {
+  override def greet() = "Woof"
+}</p>
+
+<p>In this example, class Dog extends trait Friendly. This inheritance relationship implies much the same thing as interface implementation does in Java. You can assign a Dog instance to a variable of type Friendly. For example:</p>
+
+<p>var pet: Friendly = new Dog
+println(pet.greet())
+与java不同，在scala中重载一个方法, 必须在方法的def前写上override.</p>
+
+<p>最后，java interface和scala traits的一个非常重要的区别, in Scala, you can mix in traits at instantiation time.</p>
+
+<p>trait ExclamatoryGreeter extends Friendly {
+  override def greet() = super.greet() + "!"
+}</p>
+
+<p>With this trait, you can mix in its behavior at instantiation time using the 【with】 keyword.【输出结果，疑问】</p>
+
+<p>val pup: Friendly = new Dog with ExclamatoryGreeter
+println(pup.greet())</p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "scala3.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
