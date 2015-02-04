@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+操作系统的内核（kernel）：管理整个计算机硬件。
+
+内核是被保护的，_一般用户只能通过shell来跟内核通信，以让内核达到我们想要达到的工作_。
+
+我们必须通过“shell”将我们输入的命令与内核通信，好让**内核**可以控制**硬件**来正确无误的工作。
+
+why 出现应用程序？
+
+操作系统其实是一组软件，这组软件在**控制整个硬件与管理系统的活动监测**。
+如果这个软件能被用户任意使用，用户使用不当，可能使整个系统崩溃。
+但总是需要用户操作系统，所以有了在操作系统上面发展的**应用程序**。
+
+用户通过应用程序来指挥内核，让内核达成我们所需要的硬件任务。
+
+
+![img](http://vbird.dic.ksu.edu.tw/linux_basic/0105computers_files/os_01.gif "optional title")  
+操作系统的角色图
+
+操作系统的角色图，可以看出应用程序其实是在最外层，就如同鸡蛋的外壳一样，因此这个也被称为shell。
+
+其实shell的功能只是提供用户操作系统的一个借口。
+
+
+
+百度百科的话
+>操作系统与外部最主要的接口就叫做shell。shell是操作系统最外面的一层。shell管理你与操作系统之间的交互：`等待你输入，向操作系统解释你的输入，并且处理各种各样的操作系统的输出结果`。
+>shell提供了你与操作系统之间通讯的方式。这种通讯可以以交互方式（从键盘输入，并且可以立即得到响应），或者以shell script(非交互）方式执行。
+>Shell基本上是一个命令解释器，类似于DOS下的command。它接收用户命令（如ls等），然后调用相应的应用程序。较为通用的shell有标准的Bourne shell (sh）和C shell (csh）。
+
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p>操作系统的内核（kernel）：管理整个计算机硬件。</p>
+
+<p>内核是被保护的，<em>一般用户只能通过shell来跟内核通信，以让内核达到我们想要达到的工作</em>。</p>
+
+<p>我们必须通过“shell”将我们输入的命令与内核通信，好让<strong>内核</strong>可以控制<strong>硬件</strong>来正确无误的工作。</p>
+
+<p>why 出现应用程序？</p>
+
+<p>操作系统其实是一组软件，这组软件在<strong>控制整个硬件与管理系统的活动监测</strong>。
+如果这个软件能被用户任意使用，用户使用不当，可能使整个系统崩溃。
+但总是需要用户操作系统，所以有了在操作系统上面发展的<strong>应用程序</strong>。</p>
+
+<p>用户通过应用程序来指挥内核，让内核达成我们所需要的硬件任务。</p>
+
+<p><img src="http://vbird.dic.ksu.edu.tw/linux_basic/0105computers_files/os_01.gif" alt="img" title="optional title"> <br>
+操作系统的角色图</p>
+
+<p>操作系统的角色图，可以看出应用程序其实是在最外层，就如同鸡蛋的外壳一样，因此这个也被称为shell。</p>
+
+<p>其实shell的功能只是提供用户操作系统的一个借口。</p>
+
+<p>百度百科的话</p>
+
+<blockquote>
+  <p>操作系统与外部最主要的接口就叫做shell。shell是操作系统最外面的一层。shell管理你与操作系统之间的交互：<code>等待你输入，向操作系统解释你的输入，并且处理各种各样的操作系统的输出结果</code>。
+  shell提供了你与操作系统之间通讯的方式。这种通讯可以以交互方式（从键盘输入，并且可以立即得到响应），或者以shell script(非交互）方式执行。
+  Shell基本上是一个命令解释器，类似于DOS下的command。它接收用户命令（如ls等），然后调用相应的应用程序。较为通用的shell有标准的Bourne shell (sh）和C shell (csh）。</p>
+</blockquote>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "bash.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
