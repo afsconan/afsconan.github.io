@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+#第一章  基础  
+##1.1 scala解释器  
+Tab键补全
+
+**REPL**  (读取-求值-打印-循环)的过程。
+
+##1.2 声明_值（val）_和_变量（var）_
+
+在scala中，变量或函数的类型总是写在变量或函数名的后面。
+
+_将多个变量或值放在一起声明_：
+val xmax,ymax=100//将xmax和ymax设为100
+var greeting,message:String=null//都是字符串，被初始化为null
+
+##1.3 常用类型
+scala也有7种数值类型（Byte，Char，Short，Int，Long,Float，Double）以及一个Boolean类型。
+跟Java不同，这些类型是_类_。
+
+在scala中，我们不需要包装类型（scala编译器：负责在基本类型和包装类型之间的转换）。
+
+scala还提供RichInt，RichDouble，RichChar等，
+     还有BigInt，BigDecimal类（用于任意大小的数字）。
+
+##1.4 算术和操作符重载
+在scala中，`数值类型之间的转换`：用方法，而不是强制类型转换。
+       举例：   99.44.toInt    99.toChar    99.toString
+                "99.44".toInt      "99.44".toDouble
+
+通常用    a 方法 b   作为   a.方法（b） 的简写。
+
+不提供++和--操作符，要用+=1或者-=1。  如count+=1
+
+##1.5 调用函数和方法
+引入特定包时，使用import 包名._
+
+单例对象（singleton object）【第六章 详细介绍】
+伴生对象（companion object）
+
+##1.6 apply方法
+   ` scala中构建方法的常用方法：使用伴生对象的apply方法`。  
+    "Hello"(4)  是  "Hello".apply(4)的简写  
+    BigInt("1234567890")是BigInt.apply("1234567890")的简写
+
+##1.7 Scaladoc
+    在线浏览：www.scala-lang.org/api/
+
+    使用数值类型，看RichInt、RichDouble
+    使用字符串，看StringOps
+    数学函数，位于scala.math
+ 
+    标记为implicit的方法对应的是自动（隐式）转换。
+
+
+
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<h1 id="">第一章  基础</h1>
+
+<h2 id="11scala">1.1 scala解释器</h2>
+
+<p>Tab键补全</p>
+
+<p><strong>REPL</strong>  (读取-求值-打印-循环)的过程。</p>
+
+<h2 id="12_val__var_">1.2 声明<em>值（val）</em>和<em>变量（var）</em></h2>
+
+<p>在scala中，变量或函数的类型总是写在变量或函数名的后面。</p>
+
+<p><em>将多个变量或值放在一起声明</em>：
+val xmax,ymax=100//将xmax和ymax设为100
+var greeting,message:String=null//都是字符串，被初始化为null</p>
+
+<h2 id="13">1.3 常用类型</h2>
+
+<p>scala也有7种数值类型（Byte，Char，Short，Int，Long,Float，Double）以及一个Boolean类型。
+跟Java不同，这些类型是<em>类</em>。</p>
+
+<p>在scala中，我们不需要包装类型（scala编译器：负责在基本类型和包装类型之间的转换）。</p>
+
+<p>scala还提供RichInt，RichDouble，RichChar等，
+     还有BigInt，BigDecimal类（用于任意大小的数字）。</p>
+
+<h2 id="14">1.4 算术和操作符重载</h2>
+
+<p>在scala中，<code>数值类型之间的转换</code>：用方法，而不是强制类型转换。
+       举例：   99.44.toInt    99.toChar    99.toString
+                "99.44".toInt      "99.44".toDouble</p>
+
+<p>通常用    a 方法 b   作为   a.方法（b） 的简写。</p>
+
+<p>不提供++和--操作符，要用+=1或者-=1。  如count+=1</p>
+
+<h2 id="15">1.5 调用函数和方法</h2>
+
+<p>引入特定包时，使用import 包名._</p>
+
+<p>单例对象（singleton object）【第六章 详细介绍】
+伴生对象（companion object）</p>
+
+<h2 id="16apply">1.6 apply方法</h2>
+
+<p><code>scala中构建方法的常用方法：使用伴生对象的apply方法</code>。 <br>
+    "Hello"(4)  是  "Hello".apply(4)的简写 <br>
+    BigInt("1234567890")是BigInt.apply("1234567890")的简写</p>
+
+<h2 id="17scaladoc">1.7 Scaladoc</h2>
+
+<pre><code>在线浏览：www.scala-lang.org/api/
+
+使用数值类型，看RichInt、RichDouble
+使用字符串，看StringOps
+数学函数，位于scala.math
+
+标记为implicit的方法对应的是自动（隐式）转换。
+</code></pre>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "fastlearn1.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
