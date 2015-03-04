@@ -41,12 +41,12 @@ The system currently supports three cluster managers:
 **Hadoop YARN** – the resource manager in Hadoop 2.
 
 架构中需要注意的几个有用点：  
-1 每个应用有ta各自的executor processes  
+1 每个应用有各自的executor processes  
 This has the benefit of isolating applications from each other,  
 
 data cannot be shared across different Spark applications (instances of SparkContext) without writing it to an external storage system
 
-2 Spark 对底层集群管理器不可知。
+2 Spark 对底层集群管理器不可知。  
 3 driver 最好运行在worker nodes附近, 最好在同一个局域网。
 <!-- markdown end -->
 </div>
@@ -68,12 +68,12 @@ The system currently supports three cluster managers:</p>
 <strong>Hadoop YARN</strong> – the resource manager in Hadoop 2.</p>
 
 <p>架构中需要注意的几个有用点： <br>
-1 每个应用有ta各自的executor processes <br>
+1 每个应用有各自的executor processes <br>
 This has the benefit of isolating applications from each other,  </p>
 
 <p>data cannot be shared across different Spark applications (instances of SparkContext) without writing it to an external storage system</p>
 
-<p>2 Spark 对底层集群管理器不可知。
+<p>2 Spark 对底层集群管理器不可知。 <br>
 3 driver 最好运行在worker nodes附近, 最好在同一个局域网。</p>
 <!-- content end -->
 </div>
