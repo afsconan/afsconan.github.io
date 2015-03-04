@@ -28,16 +28,26 @@
 集群模式概览  
 
 组件：  
+ ![img](http://spark.apache.org/docs/latest/img/cluster-overview.png "optional title”)  
 SparkContext<——>Cluster Manager<——>Executor （在每个Worker Node中）
 
 your application code (defined by JAR or Python files passed to SparkContext)
 
-`集群管理器`类型：
+`集群管理器`（在应用间分配资源）类型：  
 The system currently supports three cluster managers:
 
 **Standalone** – a simple cluster manager included with Spark that makes it easy to set up a cluster.  
 **Apache Mesos** – a general cluster manager that can also run Hadoop MapReduce and service applications.  
 **Hadoop YARN** – the resource manager in Hadoop 2.
+
+架构中需要注意的几个有用点：  
+1 每个应用有ta各自的executor processes  
+This has the benefit of isolating applications from each other,  
+
+data cannot be shared across different Spark applications (instances of SparkContext) without writing it to an external storage system
+
+2 Spark 对底层集群管理器不可知。
+3 driver 最好运行在worker nodes附近, 最好在同一个局域网。
 <!-- markdown end -->
 </div>
 <div class="entry" id="main">
@@ -45,16 +55,26 @@ The system currently supports three cluster managers:
 <p>集群模式概览  </p>
 
 <p>组件： <br>
+ !<a href="http://spark.apache.org/docs/latest/img/cluster-overview.png " optional="" title”"="">img</a> <br>
 SparkContext&lt;——&gt;Cluster Manager&lt;——&gt;Executor （在每个Worker Node中）</p>
 
 <p>your application code (defined by JAR or Python files passed to SparkContext)</p>
 
-<p><code>集群管理器</code>类型：
+<p><code>集群管理器</code>（在应用间分配资源）类型： <br>
 The system currently supports three cluster managers:</p>
 
 <p><strong>Standalone</strong> – a simple cluster manager included with Spark that makes it easy to set up a cluster. <br>
 <strong>Apache Mesos</strong> – a general cluster manager that can also run Hadoop MapReduce and service applications. <br>
 <strong>Hadoop YARN</strong> – the resource manager in Hadoop 2.</p>
+
+<p>架构中需要注意的几个有用点： <br>
+1 每个应用有ta各自的executor processes <br>
+This has the benefit of isolating applications from each other,  </p>
+
+<p>data cannot be shared across different Spark applications (instances of SparkContext) without writing it to an external storage system</p>
+
+<p>2 Spark 对底层集群管理器不可知。
+3 driver 最好运行在worker nodes附近, 最好在同一个局域网。</p>
 <!-- content end -->
 </div>
 <br>
