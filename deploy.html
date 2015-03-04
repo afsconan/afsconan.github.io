@@ -48,6 +48,12 @@ data cannot be shared across different Spark applications (instances of SparkCon
 
 2 Spark 对底层集群管理器不可知。  
 3 driver 最好运行在worker nodes附近, 最好在同一个局域网。
+
+`Deploy mode`:  
+Distinguishes where the driver process runs.     
+**In "cluster” mode**, the framework launches the driver inside of the cluster.    
+**In "client” mode**, the submitter launches the driver outside of the cluster.
+
 <!-- markdown end -->
 </div>
 <div class="entry" id="main">
@@ -75,6 +81,11 @@ This has the benefit of isolating applications from each other,  </p>
 
 <p>2 Spark 对底层集群管理器不可知。 <br>
 3 driver 最好运行在worker nodes附近, 最好在同一个局域网。</p>
+
+<p><code>Deploy mode</code>: <br>
+Distinguishes where the driver process runs. <br>
+<strong>In "cluster” mode</strong>, the framework launches the driver inside of the cluster. <br>
+<strong>In "client” mode</strong>, the submitter launches the driver outside of the cluster.</p>
 <!-- content end -->
 </div>
 <br>
