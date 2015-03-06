@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+大数据处理框架
+
+***集群*环境  对于编程带来的挑战**：
+
+1.并行化：
+   以并行化的方式重写应用程序——>利用更大范围节点的计算能力
+
+2.单点失败的处理：
+   节点宕机，以及个别节点计算缓慢
+
+3.动态地进行计算资源的分配
+   
+**历史**：  
+1.Google的MapReduce：展示了一个简单通用和自动容错的批处理计算模型。  
+但对其他类型的计算（如交互式和流式计算）不合适。  
+
+2.于是出现，专有的数据处理模型（如Storm,Impala,GraphLab），但也有不足（重复工作，组合问题，适用范围的局限性，资源分配，管理问题）。
+
+——>3.统一大数据处理框架Spark  
+
+某种程度上是对MapReduce模型的一种扩展：在MapReduce上实现其不擅长的计算工作（如迭代式，交互式和流式）。
+困难点在于 MapReduce缺乏一种特性（在并行计算的各个阶段进行有效的数据共享——>RDD的本质）。  
+
+利用这种有效地数据共享和类似MapReduce的操作接口，  
+上述的各种专有类型计算都能够有效的表达，而且能够获得与专有系统同等的性能。
+
+**值得一提的是**，  
+从前对于集群处理容错的方式（如MapReduce和Dryad）是将计算构建成一个有向无环图的任务集，这只能允许它们有效地重新计算部分DAG。在单独的计算之间（在迭代的计算步骤之间），除了复制文件，这些模型没有提供其他的存储抽象，这就显著地增加了在网络之间复制文件的代价。    
+*RDD能够使用当前大部分的数据并行算法和编程模型*。
+
+
+
+
+
+
+
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p>大数据处理框架</p>
+
+<p><strong><em>集群</em>环境  对于编程带来的挑战</strong>：</p>
+
+<p>1.并行化：
+   以并行化的方式重写应用程序——&gt;利用更大范围节点的计算能力</p>
+
+<p>2.单点失败的处理：
+   节点宕机，以及个别节点计算缓慢</p>
+
+<p>3.动态地进行计算资源的分配</p>
+
+<p><strong>历史</strong>： <br>
+1.Google的MapReduce：展示了一个简单通用和自动容错的批处理计算模型。 <br>
+但对其他类型的计算（如交互式和流式计算）不合适。  </p>
+
+<p>2.于是出现，专有的数据处理模型（如Storm,Impala,GraphLab），但也有不足（重复工作，组合问题，适用范围的局限性，资源分配，管理问题）。</p>
+
+<p>——&gt;3.统一大数据处理框架Spark  </p>
+
+<p>某种程度上是对MapReduce模型的一种扩展：在MapReduce上实现其不擅长的计算工作（如迭代式，交互式和流式）。
+困难点在于 MapReduce缺乏一种特性（在并行计算的各个阶段进行有效的数据共享——&gt;RDD的本质）。  </p>
+
+<p>利用这种有效地数据共享和类似MapReduce的操作接口， <br>
+上述的各种专有类型计算都能够有效的表达，而且能够获得与专有系统同等的性能。</p>
+
+<p><strong>值得一提的是</strong>， <br>
+从前对于集群处理容错的方式（如MapReduce和Dryad）是将计算构建成一个有向无环图的任务集，这只能允许它们有效地重新计算部分DAG。在单独的计算之间（在迭代的计算步骤之间），除了复制文件，这些模型没有提供其他的存储抽象，这就显著地增加了在网络之间复制文件的代价。 <br>
+<em>RDD能够使用当前大部分的数据并行算法和编程模型</em>。</p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "spark_system_overview.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
