@@ -55,10 +55,43 @@
 从前对于集群处理容错的方式（如MapReduce和Dryad）是将计算构建成一个有向无环图的任务集，这只能允许它们有效地重新计算部分DAG。在单独的计算之间（在迭代的计算步骤之间），除了复制文件，这些模型没有提供其他的存储抽象，这就显著地增加了在网络之间复制文件的代价。    
 *RDD能够使用当前大部分的数据并行算法和编程模型*。
 
+**RDD表达能力**  
+使用RDD可以实现很多现有的集群编程模型以及一些以前的模型不支持的新应用。  
+在这些模型中，RDD能够取得和专有系统同样的性能，还能提供包括容错处理、滞后节点（straggler node）处理等*这些专有系统缺乏的特性*。
+
+四类模型：  
+1.迭代算法  ——专有系统 ，图处理、机器学习  
+2.关系型查询  ——SQL查询  
+3.MapReduce批处理  ——` RDD提供的接口是MapReduce的超集，RDD可以有效地运行MapReduce实现的应用程序`。  
+4.流式处理  ——重要多理解（P4）
+ `RDD实现了一种新的模型（离散数据流，D-Stream）`
 
 
+**Spark子系统**  
+大数据处理场景：   1.batch data processing  
+&emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;   2.interactive query  
+&emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;   3.streaming data processing  
+————>  
+`Spark Core`：*基于RDD提供了丰富的操作接口，利用**DAG**进行统一的任务规划*。使得Spark能够更加灵活地处理类似MapReduce的批处理作业。  
+`在Spark Core之上，有Shark/Spark SQL、Spark Streaming、GraphX、MLlib`。
 
+ `Spark生态系统的目标：`
+将*批处理、交互式处理、流式处理*融合到同一个**软件栈**中。
 
+`对于最终的用户或者开发者而言，Spark生态系统有如下特性：`  
+1.**Spark生态系统兼容Hadoop生态系统**  ——   
+完美兼容Hadoop生态中的HDFS和YARN等其他组件，使得现有的Hadoop用户能够非常容易地迁移到Spark系统中（虽然Spark通用引擎在一定程度上是用来取代MapReduce系统的）
+
+2.**Spark生态系统学习成本很低**  
+`开发者对Spark Core的原理有比较深入的理解，对架构在Spark Core之上的其他组件的运用将会非常容易。`  
+3.**Spark性能表现优异**  
+ 由于Spark利用*DAG*进行调度执行规划，所以在多任务计算以及迭代计算中能够大量减少磁盘I/O的时间。  
+对于每一项任务*启动一个线程*，而不是启动一个进程，大大缩短了任务启动时间。  
+4.**Spark有强大的社区支持**  
+Spark创业团队成立Databricks公司，全力支持Spark生态的发展。  
+5.**Spark支持多种语言编程接口**  
+*Spark生态本身是使用Scala语言编写的*，
+考虑到流行性，Spark从一开始就支持Java和Python接口，方便开发者自由选择。
 
 
 <!-- markdown end -->
@@ -94,6 +127,43 @@
 <p><strong>值得一提的是</strong>， <br>
 从前对于集群处理容错的方式（如MapReduce和Dryad）是将计算构建成一个有向无环图的任务集，这只能允许它们有效地重新计算部分DAG。在单独的计算之间（在迭代的计算步骤之间），除了复制文件，这些模型没有提供其他的存储抽象，这就显著地增加了在网络之间复制文件的代价。 <br>
 <em>RDD能够使用当前大部分的数据并行算法和编程模型</em>。</p>
+
+<p><strong>RDD表达能力</strong> <br>
+使用RDD可以实现很多现有的集群编程模型以及一些以前的模型不支持的新应用。 <br>
+在这些模型中，RDD能够取得和专有系统同样的性能，还能提供包括容错处理、滞后节点（straggler node）处理等<em>这些专有系统缺乏的特性</em>。</p>
+
+<p>四类模型： <br>
+1.迭代算法  ——专有系统 ，图处理、机器学习 <br>
+2.关系型查询  ——SQL查询 <br>
+3.MapReduce批处理  ——<code>RDD提供的接口是MapReduce的超集，RDD可以有效地运行MapReduce实现的应用程序</code>。 <br>
+4.流式处理  ——重要多理解（P4）
+ <code>RDD实现了一种新的模型（离散数据流，D-Stream）</code></p>
+
+<p><strong>Spark子系统</strong> <br>
+大数据处理场景：   1.batch data processing <br>
+            2.interactive query <br>
+            3.streaming data processing <br>
+————&gt; <br>
+<code>Spark Core</code>：<em>基于RDD提供了丰富的操作接口，利用<strong>DAG</strong>进行统一的任务规划</em>。使得Spark能够更加灵活地处理类似MapReduce的批处理作业。 <br>
+<code>在Spark Core之上，有Shark/Spark SQL、Spark Streaming、GraphX、MLlib</code>。</p>
+
+<p><code>Spark生态系统的目标：</code>
+将<em>批处理、交互式处理、流式处理</em>融合到同一个<strong>软件栈</strong>中。</p>
+
+<p><code>对于最终的用户或者开发者而言，Spark生态系统有如下特性：</code> <br>
+1.<strong>Spark生态系统兼容Hadoop生态系统</strong>  —— <br>
+完美兼容Hadoop生态中的HDFS和YARN等其他组件，使得现有的Hadoop用户能够非常容易地迁移到Spark系统中（虽然Spark通用引擎在一定程度上是用来取代MapReduce系统的）</p>
+
+<p>2.<strong>Spark生态系统学习成本很低</strong> <br>
+<code>开发者对Spark Core的原理有比较深入的理解，对架构在Spark Core之上的其他组件的运用将会非常容易。</code> <br>
+3.<strong>Spark性能表现优异</strong> <br>
+ 由于Spark利用<em>DAG</em>进行调度执行规划，所以在多任务计算以及迭代计算中能够大量减少磁盘I/O的时间。 <br>
+对于每一项任务<em>启动一个线程</em>，而不是启动一个进程，大大缩短了任务启动时间。 <br>
+4.<strong>Spark有强大的社区支持</strong> <br>
+Spark创业团队成立Databricks公司，全力支持Spark生态的发展。 <br>
+5.<strong>Spark支持多种语言编程接口</strong> <br>
+<em>Spark生态本身是使用Scala语言编写的</em>，
+考虑到流行性，Spark从一开始就支持Java和Python接口，方便开发者自由选择。</p>
 <!-- content end -->
 </div>
 <br>
