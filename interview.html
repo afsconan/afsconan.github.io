@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+[Tachyon作者：大数据存储以及处理框架经验分享（已阅）](http://www.csdn.net/article/2013-11-28/2817652-BDTC2013-interview-Li-Haoyuan)  
+[Tachyon资讯（后续阅读）](http://www.csdn.net/tag/tachyon/news)  
+[AMPLab资讯（后续阅读）](http://www.csdn.net/tag/amplab/news)
+[李浩源资讯（后续阅读）](http://www.csdn.net/tag/amplab/news)
+[李浩源资讯（重点阅读）](http://www.csdn.net/tag/bdtc/news)
+
+
+[Databricks核心成员专访：感受Spark的蓬勃发展](http://www.csdn.net/article/2013-11-12/2817464-0Reynold-Xin-interview)
+
+[对话Spark核心作者Ion Stoica：我的编程之路从2KB内存开始（重要）](http://www.csdn.net/article/2013-11-28/2817653-Ion-Stoica_interview_spark)  
+Ion Stoica（李浩源的两位导师之一， a co-founder and currently on leave at Databricks，also a co-founder of Conviva Networks，弹性P2P协议Chord、集群内存计算框架Spark、集群资源管理平台Mesos都出自他）  
+
+Spark, a cluster computing frameworks to efficiently support interactive, and iterative computations.
+`Spark执行的是粗粒度的操作。这使得Spark可以限制世系（lineage）的长度，从而能在出错时有效地实现恢复。`
+
+Mesos, a cluster manager that provides efficient resource isolation and sharing across cluster computing frameworks, such as Hadoop, MPI and Hypertable.
+
+大约一个月前， Ion Stoica和他创立的创新公司 Databricks再次成为大数据行业关注的焦点：Databricks获得了来自Andreessen Horowitz 1400万美元投资，Cloudera宣布联合Databricks提供Spark企业级服务。
+
+Databricks由Ion Stoica与麻省理工学院计算机科学助理教授Matei Zaharia、UC Berkeley计算机科学教授Scott Shenker等共同创办，Scott还是知名SDN公司Nicira的联合创始人及CEO。Databricks专注于Spark技术的产品化。
+
+Mesos项目有哪些特别之处？  
+`Mesos`是第一个支持多种集群计算框架的资源管理平台，支持Hadoop、Spark及Storm等共享同一数据中心的资源。这将带来两方面的好处，首先能提升资源利用率，计算框架能够获得其他框架不用的资源。同时，能提升性能，不同的计算框架可以共享同一集群的数据（不需要在不同的集群之间移动数据）。  
+Mesos展示出两方面特性。首先，支持细粒度共享，在任务级别（而非作业级别）共享资源，而每个任务可能只有短短的几秒。其次，Mesos具备高度扩展性，它用C++开发并使用了模块化架构，让上层框架决定哪个任务被调度、何时被调度 (而Mesos调度器只决定哪些资源分配给那个上层框架，这是二层调度中的底层调度)。这让Mesos可以扩展到数万台物理机，同时运行数百万的任务。
+
+`CSDN：AMPLab更宏伟的一个愿景是BDAS(Berkeley Data Analytics Stack)，您能描述一下BDAS吗？它能做什么？多久能够实现这样的愿景？`
+
+Ion Stoica：正如其名，BDAS是我们过去几年在Berkeley开发的一个大数据分析软件堆栈。BDAS的所有组件都是开源的，在社区的帮助下，我们希望它能在工业界、学术界和其他科研组织广泛使用。
+
+BDAS由资源管理层（Mesos）和计算层（Spark）组成。Spark是BDAS的执行引擎，就像MapReduce与Hadoop的关系一样。在Spark之上，我们实现了几个组件来处理不同的工作负载，包括Shark——用于支持SQL API，SaprkStreaming——用于流计算，MLlib——高质量的机器学习算法库，以及 BlinkDB——一个采用近似技术的查询引擎，通过采样技术实现大规模的交互式查询。此外，我们还开发并建立了 Tachyon，一个支持多Spark实例高效共享内存数据的存储层。
+
+BDAS的核心是支持那些Hadoop不能优化执行的工作负载，比如低延迟查询，流式和迭代计算。这将让用户更快速地分析数据并作出决策，最终将提升企业和组织的投资回报率。
+
+好几个BDAS的组件已经可以获得。Spark、Shark和Mesos已经在一些企业中用于生产环境，包括Twitter、Yahoo!、苹果公司和Intel。例如，Mesos目前在Twitter运行了超过6000个节点，有数百个工程师在使用它。Mesos和Spark都是Apache项目，有活跃的开源社区做支撑。例如，Spark有来自23个公司的超过90个贡献者。
+
+作为对Mesos、Spark和Shark的补充，我们发布了alpha版的SparkStreaming、Tachyon、MLlib和BlinkDB。展望未来，我们计划发布一个图计算引擎——GraphX，以及MLbase——一个机器学习框架，它提供了声明式接口（说明做什么而非怎么做），允许非专业人员使用复杂的机器学习算法。 
+非常重要的一点是，BDAS和Hadoop软件堆栈是互补关系（而不是竞争关系），两者在多个层次可以互操作。首先，BDAS并没有自己的文件系统，所以它可以使用Hadoop文件系统（HDFS）。其次，Spark可以运行在Hadoop YARN上，替代Mesos。第三，Hadoop也可以运行在Mesos上。第四，Shark兼容Hive，后者是Hadoop上面最流行的SQL解决方案。
+
+
+
+
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p><a href="http://www.csdn.net/article/2013-11-28/2817652-BDTC2013-interview-Li-Haoyuan">Tachyon作者：大数据存储以及处理框架经验分享（已阅）</a> <br>
+<a href="http://www.csdn.net/tag/tachyon/news">Tachyon资讯（后续阅读）</a> <br>
+<a href="http://www.csdn.net/tag/amplab/news">AMPLab资讯（后续阅读）</a>
+<a href="http://www.csdn.net/tag/amplab/news">李浩源资讯（后续阅读）</a>
+<a href="http://www.csdn.net/tag/bdtc/news">李浩源资讯（重点阅读）</a></p>
+
+<p><a href="http://www.csdn.net/article/2013-11-12/2817464-0Reynold-Xin-interview">Databricks核心成员专访：感受Spark的蓬勃发展</a></p>
+
+<p><a href="http://www.csdn.net/article/2013-11-28/2817653-Ion-Stoica_interview_spark">对话Spark核心作者Ion Stoica：我的编程之路从2KB内存开始（重要）</a> <br>
+Ion Stoica（李浩源的两位导师之一， a co-founder and currently on leave at Databricks，also a co-founder of Conviva Networks，弹性P2P协议Chord、集群内存计算框架Spark、集群资源管理平台Mesos都出自他）  </p>
+
+<p>Spark, a cluster computing frameworks to efficiently support interactive, and iterative computations.
+<code>Spark执行的是粗粒度的操作。这使得Spark可以限制世系（lineage）的长度，从而能在出错时有效地实现恢复。</code></p>
+
+<p>Mesos, a cluster manager that provides efficient resource isolation and sharing across cluster computing frameworks, such as Hadoop, MPI and Hypertable.</p>
+
+<p>大约一个月前， Ion Stoica和他创立的创新公司 Databricks再次成为大数据行业关注的焦点：Databricks获得了来自Andreessen Horowitz 1400万美元投资，Cloudera宣布联合Databricks提供Spark企业级服务。</p>
+
+<p>Databricks由Ion Stoica与麻省理工学院计算机科学助理教授Matei Zaharia、UC Berkeley计算机科学教授Scott Shenker等共同创办，Scott还是知名SDN公司Nicira的联合创始人及CEO。Databricks专注于Spark技术的产品化。</p>
+
+<p>Mesos项目有哪些特别之处？ <br>
+<code>Mesos</code>是第一个支持多种集群计算框架的资源管理平台，支持Hadoop、Spark及Storm等共享同一数据中心的资源。这将带来两方面的好处，首先能提升资源利用率，计算框架能够获得其他框架不用的资源。同时，能提升性能，不同的计算框架可以共享同一集群的数据（不需要在不同的集群之间移动数据）。 <br>
+Mesos展示出两方面特性。首先，支持细粒度共享，在任务级别（而非作业级别）共享资源，而每个任务可能只有短短的几秒。其次，Mesos具备高度扩展性，它用C++开发并使用了模块化架构，让上层框架决定哪个任务被调度、何时被调度 (而Mesos调度器只决定哪些资源分配给那个上层框架，这是二层调度中的底层调度)。这让Mesos可以扩展到数万台物理机，同时运行数百万的任务。</p>
+
+<p><code>CSDN：AMPLab更宏伟的一个愿景是BDAS(Berkeley Data Analytics Stack)，您能描述一下BDAS吗？它能做什么？多久能够实现这样的愿景？</code></p>
+
+<p>Ion Stoica：正如其名，BDAS是我们过去几年在Berkeley开发的一个大数据分析软件堆栈。BDAS的所有组件都是开源的，在社区的帮助下，我们希望它能在工业界、学术界和其他科研组织广泛使用。</p>
+
+<p>BDAS由资源管理层（Mesos）和计算层（Spark）组成。Spark是BDAS的执行引擎，就像MapReduce与Hadoop的关系一样。在Spark之上，我们实现了几个组件来处理不同的工作负载，包括Shark——用于支持SQL API，SaprkStreaming——用于流计算，MLlib——高质量的机器学习算法库，以及 BlinkDB——一个采用近似技术的查询引擎，通过采样技术实现大规模的交互式查询。此外，我们还开发并建立了 Tachyon，一个支持多Spark实例高效共享内存数据的存储层。</p>
+
+<p>BDAS的核心是支持那些Hadoop不能优化执行的工作负载，比如低延迟查询，流式和迭代计算。这将让用户更快速地分析数据并作出决策，最终将提升企业和组织的投资回报率。</p>
+
+<p>好几个BDAS的组件已经可以获得。Spark、Shark和Mesos已经在一些企业中用于生产环境，包括Twitter、Yahoo!、苹果公司和Intel。例如，Mesos目前在Twitter运行了超过6000个节点，有数百个工程师在使用它。Mesos和Spark都是Apache项目，有活跃的开源社区做支撑。例如，Spark有来自23个公司的超过90个贡献者。</p>
+
+<p>作为对Mesos、Spark和Shark的补充，我们发布了alpha版的SparkStreaming、Tachyon、MLlib和BlinkDB。展望未来，我们计划发布一个图计算引擎——GraphX，以及MLbase——一个机器学习框架，它提供了声明式接口（说明做什么而非怎么做），允许非专业人员使用复杂的机器学习算法。 
+非常重要的一点是，BDAS和Hadoop软件堆栈是互补关系（而不是竞争关系），两者在多个层次可以互操作。首先，BDAS并没有自己的文件系统，所以它可以使用Hadoop文件系统（HDFS）。其次，Spark可以运行在Hadoop YARN上，替代Mesos。第三，Hadoop也可以运行在Mesos上。第四，Shark兼容Hive，后者是Hadoop上面最流行的SQL解决方案。</p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "interview.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
