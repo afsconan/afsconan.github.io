@@ -66,6 +66,10 @@ org.apache.spark.*ShuffleDependency* （宽依赖）
 **4.RDD区分计算（compute）**   
 对于Spark中每个RDD的计算都是以partition(分区)为单位的，而且RDD中的compute函数都是在对迭代器进行复合，不需要保存每次计算的结果。    
 **5.RDD分区函数（partitioner）**    
+目前在Spark中实现了两种类型的分区函数：
+HashPatitioner（哈希分区）和RangePatitioner（区域分区）
+
+partitioner这个属性，只存在于（K,V）类型的RDD中，对于非（K,V）类型的partitioner的值就是None。
 
 
 
@@ -123,7 +127,11 @@ org.apache.spark.<em>OneToOneDependency</em>（窄依赖）
 org.apache.spark.<em>ShuffleDependency</em> （宽依赖） <br>
 <strong>4.RDD区分计算（compute）</strong> <br>
 对于Spark中每个RDD的计算都是以partition(分区)为单位的，而且RDD中的compute函数都是在对迭代器进行复合，不需要保存每次计算的结果。 <br>
-<strong>5.RDD分区函数（partitioner）</strong>    </p>
+<strong>5.RDD分区函数（partitioner）</strong> <br>
+目前在Spark中实现了两种类型的分区函数：
+HashPatitioner（哈希分区）和RangePatitioner（区域分区）</p>
+
+<p>partitioner这个属性，只存在于（K,V）类型的RDD中，对于非（K,V）类型的partitioner的值就是None。</p>
 <!-- content end -->
 </div>
 <br>
