@@ -33,6 +33,28 @@
 
 
 [Databricks核心成员专访：感受Spark的蓬勃发展](http://www.csdn.net/article/2013-11-12/2817464-0Reynold-Xin-interview)  
+CSDN：目前Spark的发展状况是怎么样的？未来的研究方向是什么？  
+辛湜：**UC Berkeley AMPLab今年把Spark贡献给了*ASF（Apache Software Foundation）*开源社区，Spark已经成为一个ASF项目，正式名字是Apache Spark**。很多公司和机构开始利用Spark分析和提取数据，编写机器学习和图的应用等等。在中国我知道淘宝、腾讯、优酷、大众点评等互联网公司都有成功的案例。全球各地已经有接近100个开源贡献者，包括了很多身在中国的工程师。除了Hadoop MapReduce之外，Spark是用户数和贡献人数最多的大数据开源系统。Spark可能会在不久的将来超越MapReduce。  
+`Spark的发展重点在以下几个方面：`  
+**Spark Streaming**：大大提高Spark流处理的能力和稳定性，使用户可以用同一套代码进行大数据流处理和批量处理。  
+**MLLib**：Spark 0.8里面增加的一个高质量的机器学习库。我们希望添加更多的算法到这个库里面，使得Spark成为分布式机器学习应用的标准。  
+**GraphX**：*现在有越来越多的社交网络分析以及机器学习算法可以利用图算法来实现*，GraphX是在Spark之上实现的一个图框架，可以让用户凭借短短几行代码简洁地实现多种图算法。  
+**易用性**：简化安装、设置以及使用。完善Python/Java的API。我们也在考虑提供其他语言的API，包括R等等。  
+**稳定性**：和用户以及开源社区合作，提高稳定性，部署更多的应用在Spark上。  
+**性能**：Spark虽然在这方面上起点比较高，但是还有很大的提升空间。 
+
+CSDN：能否介绍下Databricks的情况？
+
+辛湜：今年年中，我和几个AMPLab的同僚（包括Ion Stoica教授和Spark的原作者Matei Zaharia）共同创立了Databricks公司。Databricks的目标是从Spark开始，构建一系列更强大、更简单的大数据分析处理工具和平台。九月份的时候，我们正式宣布从硅谷风投Andreessen Horowitz获得A轮融资1400万美元，利用这些资金吸引人才，提高大数据生态系统发展的步伐。
+
+CSDN：在刚结束的2013 Strata+Hadoop大会上，Cloudera宣布联合Databricks提供Spark企业级服务，这对于Databricks和Spark都有何重大意义？
+
+辛湜：尽管Spark现在有很多互联网以及科技公司的成功案例，得到了技术人员和开源社区的肯定，但是这个项目最终的成功需要大量企业级的应用。这个合作关系有三重意义：第一，它验证了整个大数据生态圈对Spark发展的认同，越来越多的机构认识到Spark可以帮助他们更高效、更快地从大数据中获取有价值的信息以辅助商业决策。第二，这个合作关系为用户提供企业级的支持奠定了基础。第三，`Spark从项目初始阶段就是以尽最大程度兼容Hadoop而设计的（可以直接读取Hadoop文件以及Hadoop兼容的储存系统）`，两个公司的合作可以确保以后Spark成为Hadoop生态系统中最重要的框架之一，为Spark和Hadoop用户带来更大的价值。
+
+CSDN：自YARN之后，Hadoop可以运行更多的处理集群，对比其它的数据处理框架，Spark的优势会体现在什么地方？杀手级应用场景是什么？ 
+
+辛湜：短期来看，最大的应用是`进行复杂的数据分析，比如说利用机器学习或者图算法来实现推荐系统等等`。长远来看，Spark的`强项是可以用同一个框架来满足很多不同的应用场景`，包括ETL、SQL、机器学习、图分析等等，更好的把这些应用场景集成起来。
+
 [Cloudera与Databricks达成合作 Spark迈上企业级之路](http://www.csdn.net/article/2013-10-31/2817360)
 `Cloudera与初创公司Databricks展开了一项合作，在Cloudera的Hadoop软件内集成和支持Apache Spark数据处理平台。Spark专为速度和可用性设计，是推动Hadoop超越MapReduce的几种技术之一。`  
 年度Hadoop World会议上最火的一则消息可能就是`Cloudera决定提供Apache Spark的全企业级支持——类似Hadoop发行版里的定制内容及付费产品支持`，不仅仅是技术整合。这进一步证明了未来Hadoop的工作负载比现在和过去的看起来大不一样。  
@@ -42,6 +64,7 @@ Spark是一个内存中的数据处理平台，兼容Hadoop数据源，但是比
 Ion Stoica（李浩源的两位导师之一， a co-founder and currently on leave at Databricks，also a co-founder of Conviva Networks，弹性P2P协议Chord、集群内存计算框架Spark、集群资源管理平台Mesos都出自他）  
 
 Spark, a cluster computing frameworks to efficiently support interactive, and iterative computations.  
+`Spark从项目初始阶段就是以尽最大程度兼容Hadoop而设计的（可以直接读取Hadoop文件以及Hadoop兼容的储存系统）`
 `Spark执行的是粗粒度的操作。这使得Spark可以限制世系（lineage）的长度，从而能在出错时有效地实现恢复。`
 
 Mesos, a cluster manager that provides efficient resource isolation and sharing across cluster computing frameworks, such as Hadoop, MPI and Hypertable.
@@ -81,7 +104,29 @@ BDAS的核心是支持那些Hadoop不能优化执行的工作负载，比如低�
 <a href="http://www.csdn.net/tag/bdtc/news">BDTC资讯（重点阅读）</a></p>
 
 <p><a href="http://www.csdn.net/article/2013-11-12/2817464-0Reynold-Xin-interview">Databricks核心成员专访：感受Spark的蓬勃发展</a> <br>
-<a href="http://www.csdn.net/article/2013-10-31/2817360">Cloudera与Databricks达成合作 Spark迈上企业级之路</a>
+CSDN：目前Spark的发展状况是怎么样的？未来的研究方向是什么？ <br>
+辛湜：<strong>UC Berkeley AMPLab今年把Spark贡献给了<em>ASF（Apache Software Foundation）</em>开源社区，Spark已经成为一个ASF项目，正式名字是Apache Spark</strong>。很多公司和机构开始利用Spark分析和提取数据，编写机器学习和图的应用等等。在中国我知道淘宝、腾讯、优酷、大众点评等互联网公司都有成功的案例。全球各地已经有接近100个开源贡献者，包括了很多身在中国的工程师。除了Hadoop MapReduce之外，Spark是用户数和贡献人数最多的大数据开源系统。Spark可能会在不久的将来超越MapReduce。 <br>
+<code>Spark的发展重点在以下几个方面：</code> <br>
+<strong>Spark Streaming</strong>：大大提高Spark流处理的能力和稳定性，使用户可以用同一套代码进行大数据流处理和批量处理。 <br>
+<strong>MLLib</strong>：Spark 0.8里面增加的一个高质量的机器学习库。我们希望添加更多的算法到这个库里面，使得Spark成为分布式机器学习应用的标准。 <br>
+<strong>GraphX</strong>：<em>现在有越来越多的社交网络分析以及机器学习算法可以利用图算法来实现</em>，GraphX是在Spark之上实现的一个图框架，可以让用户凭借短短几行代码简洁地实现多种图算法。 <br>
+<strong>易用性</strong>：简化安装、设置以及使用。完善Python/Java的API。我们也在考虑提供其他语言的API，包括R等等。 <br>
+<strong>稳定性</strong>：和用户以及开源社区合作，提高稳定性，部署更多的应用在Spark上。 <br>
+<strong>性能</strong>：Spark虽然在这方面上起点比较高，但是还有很大的提升空间。 </p>
+
+<p>CSDN：能否介绍下Databricks的情况？</p>
+
+<p>辛湜：今年年中，我和几个AMPLab的同僚（包括Ion Stoica教授和Spark的原作者Matei Zaharia）共同创立了Databricks公司。Databricks的目标是从Spark开始，构建一系列更强大、更简单的大数据分析处理工具和平台。九月份的时候，我们正式宣布从硅谷风投Andreessen Horowitz获得A轮融资1400万美元，利用这些资金吸引人才，提高大数据生态系统发展的步伐。</p>
+
+<p>CSDN：在刚结束的2013 Strata+Hadoop大会上，Cloudera宣布联合Databricks提供Spark企业级服务，这对于Databricks和Spark都有何重大意义？</p>
+
+<p>辛湜：尽管Spark现在有很多互联网以及科技公司的成功案例，得到了技术人员和开源社区的肯定，但是这个项目最终的成功需要大量企业级的应用。这个合作关系有三重意义：第一，它验证了整个大数据生态圈对Spark发展的认同，越来越多的机构认识到Spark可以帮助他们更高效、更快地从大数据中获取有价值的信息以辅助商业决策。第二，这个合作关系为用户提供企业级的支持奠定了基础。第三，<code>Spark从项目初始阶段就是以尽最大程度兼容Hadoop而设计的（可以直接读取Hadoop文件以及Hadoop兼容的储存系统）</code>，两个公司的合作可以确保以后Spark成为Hadoop生态系统中最重要的框架之一，为Spark和Hadoop用户带来更大的价值。</p>
+
+<p>CSDN：自YARN之后，Hadoop可以运行更多的处理集群，对比其它的数据处理框架，Spark的优势会体现在什么地方？杀手级应用场景是什么？ </p>
+
+<p>辛湜：短期来看，最大的应用是<code>进行复杂的数据分析，比如说利用机器学习或者图算法来实现推荐系统等等</code>。长远来看，Spark的<code>强项是可以用同一个框架来满足很多不同的应用场景</code>，包括ETL、SQL、机器学习、图分析等等，更好的把这些应用场景集成起来。</p>
+
+<p><a href="http://www.csdn.net/article/2013-10-31/2817360">Cloudera与Databricks达成合作 Spark迈上企业级之路</a>
 <code>Cloudera与初创公司Databricks展开了一项合作，在Cloudera的Hadoop软件内集成和支持Apache Spark数据处理平台。Spark专为速度和可用性设计，是推动Hadoop超越MapReduce的几种技术之一。</code> <br>
 年度Hadoop World会议上最火的一则消息可能就是<code>Cloudera决定提供Apache Spark的全企业级支持——类似Hadoop发行版里的定制内容及付费产品支持</code>，不仅仅是技术整合。这进一步证明了未来Hadoop的工作负载比现在和过去的看起来大不一样。 <br>
 Spark是一个内存中的数据处理平台，兼容Hadoop数据源，但是比Hadoop MapReduce运行的更快。它非常适合机器学习作业，以及交互式数据查询，非常易于开发者使用，因为它包含了Scala、Python、Java的API。Spark已经在大量的网络公司和网络创业公司中使用，一个旨在商业化Spark的初创公司Databricks近日获得了1400万美元的风险投资。</p>
@@ -90,6 +135,7 @@ Spark是一个内存中的数据处理平台，兼容Hadoop数据源，但是比
 Ion Stoica（李浩源的两位导师之一， a co-founder and currently on leave at Databricks，also a co-founder of Conviva Networks，弹性P2P协议Chord、集群内存计算框架Spark、集群资源管理平台Mesos都出自他）  </p>
 
 <p>Spark, a cluster computing frameworks to efficiently support interactive, and iterative computations. <br>
+<code>Spark从项目初始阶段就是以尽最大程度兼容Hadoop而设计的（可以直接读取Hadoop文件以及Hadoop兼容的储存系统）</code>
 <code>Spark执行的是粗粒度的操作。这使得Spark可以限制世系（lineage）的长度，从而能在出错时有效地实现恢复。</code></p>
 
 <p>Mesos, a cluster manager that provides efficient resource isolation and sharing across cluster computing frameworks, such as Hadoop, MPI and Hypertable.</p>
