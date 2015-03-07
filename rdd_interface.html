@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+**一、Spark编程中的重要概念：**（具体实例  P10）
+
+**1.弹性分布式数据集RDD（Resilient Distributed DataSets）**
+
+**2.创建操作（creation operation）**  
+RDD的*初始创建都是由SparkContext来负责*的，将内存中的集合或者外部文件系统e作为输入源。
+
+**3.转换操作（transformation operation）**   
+将一个RDD*通过一定的操作*变换成另一个RDD。
+
+**4.控制操作  （control operation）**  
+对RDD进行持久化，可以*让RDD保存在磁盘或者内存中*，以便后续重复使用。
+
+**5.行动操作（action operation）**  
+由于Spark是惰性计算的，所以对于任何RDD进行行动操作，都会触发Spark作业的运行，从而产生最终的结果。  
+Spark中的行动操作基本分为两类：一类的操作结果变成Scala集合或者标量，另一类就将RDD保存到外部文件或者数据库系统中。
+
+**对于一个Spark数据处理程序而言，一般情况下，经过输入操作（创建操作）、转换操作、控制操作、输出操作（行动操作）来完成一个作业。**  
+当然一个Spark应用程序中，可以有多个行动操作，也就是有多个作业存在。
+
+
+**二、Spark RDD**
+
+
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p><strong>一、Spark编程中的重要概念：</strong>（具体实例  P10）</p>
+
+<p><strong>1.弹性分布式数据集RDD（Resilient Distributed DataSets）</strong></p>
+
+<p><strong>2.创建操作（creation operation）</strong> <br>
+RDD的<em>初始创建都是由SparkContext来负责</em>的，将内存中的集合或者外部文件系统e作为输入源。</p>
+
+<p><strong>3.转换操作（transformation operation）</strong> <br>
+将一个RDD<em>通过一定的操作</em>变换成另一个RDD。</p>
+
+<p><strong>4.控制操作  （control operation）</strong> <br>
+对RDD进行持久化，可以<em>让RDD保存在磁盘或者内存中</em>，以便后续重复使用。</p>
+
+<p><strong>5.行动操作（action operation）</strong> <br>
+由于Spark是惰性计算的，所以对于任何RDD进行行动操作，都会触发Spark作业的运行，从而产生最终的结果。 <br>
+Spark中的行动操作基本分为两类：一类的操作结果变成Scala集合或者标量，另一类就将RDD保存到外部文件或者数据库系统中。</p>
+
+<p><strong>对于一个Spark数据处理程序而言，一般情况下，经过输入操作（创建操作）、转换操作、控制操作、输出操作（行动操作）来完成一个作业。</strong> <br>
+当然一个Spark应用程序中，可以有多个行动操作，也就是有多个作业存在。</p>
+
+<p><strong>二、Spark RDD</strong></p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "rdd_interface.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
