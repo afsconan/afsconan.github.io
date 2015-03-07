@@ -30,7 +30,7 @@
 **1.弹性分布式数据集RDD（Resilient Distributed DataSets）**
 
 **2.创建操作（creation operation）**  
-RDD的*初始创建都是由SparkContext来负责*的，将内存中的集合或者外部文件系统e作为输入源。
+RDD的*初始创建都是由SparkContext来负责*的，将内存中的集合或者外部文件系统作为输入源。
 
 **3.转换操作（transformation operation）**   
 将一个RDD*通过一定的操作*变换成另一个RDD。
@@ -39,14 +39,45 @@ RDD的*初始创建都是由SparkContext来负责*的，将内存中的集合或
 对RDD进行持久化，可以*让RDD保存在磁盘或者内存中*，以便后续重复使用。
 
 **5.行动操作（action operation）**  
-由于Spark是惰性计算的，所以对于任何RDD进行行动操作，都会触发Spark作业的运行，从而产生最终的结果。  
+由于Spark是惰性计算的，所以对于任何RDD进行行动操作，都会触发Spark作业的运行，从而产生最终的结果。   
 Spark中的行动操作基本分为两类：一类的操作结果变成Scala集合或者标量，另一类就将RDD保存到外部文件或者数据库系统中。
 
 **对于一个Spark数据处理程序而言，一般情况下，经过输入操作（创建操作）、转换操作、控制操作、输出操作（行动操作）来完成一个作业。**  
 当然一个Spark应用程序中，可以有多个行动操作，也就是有多个作业存在。
 
 
-**二、Spark RDD**
+**二、Spark RDD**  
+一个RDD代表一个被分区的只读数据集。  
+一个RDD的生成只有两种途径：  
+（1）来自于内存集合和外部存储系统  
+（2）通过转换操作来自于其他RDD（如map、filter、join等）  
+**RDD是粗粒度的操作数据集**    （每一个转换操作都会生成一个新的RDD）（一个操作会被应用在RDD的所有数据上）    
+**所以只要通过记录下这些作用在RDD之上的转化操作，来构建RDD的继承关系（ lineage），就可以有效地进行容错处理，而不需要将实际的RDD数据进行记录拷贝**  
+
+**1.RDD分区（partitions）**  
+可以指定多少分区，也可以不指定（采用系统默认的分区数----程序所分配到的资源的CPU核的个数）  
+**2.RDD优先位置（preferredLocations）**   
+preferredLocations返回每一个数据块所在的机器名或者 IP地址（如果每一块数据是多份存储的，那么就会返回多个机器地址）  
+**3.RDD依赖关系（dependencies）**    
+*窄依赖*：每一个父RDD的分区最多只被子RDD的一个分区所使用。  
+*宽依赖*：多个子RDD的分区会依赖于同一个父RDD的分区。   
+org.apache.spark.*OneToOneDependency*（窄依赖）
+org.apache.spark.*ShuffleDependency* （宽依赖）  
+**4.RDD区分计算（compute）**   
+对于Spark中每个RDD的计算都是以partition(分区)为单位的，而且RDD中的compute函数都是在对迭代器进行复合，不需要保存每次计算的结果。    
+**5.RDD分区函数（partitioner）**    
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- markdown end -->
@@ -58,7 +89,7 @@ Spark中的行动操作基本分为两类：一类的操作结果变成Scala集�
 <p><strong>1.弹性分布式数据集RDD（Resilient Distributed DataSets）</strong></p>
 
 <p><strong>2.创建操作（creation operation）</strong> <br>
-RDD的<em>初始创建都是由SparkContext来负责</em>的，将内存中的集合或者外部文件系统e作为输入源。</p>
+RDD的<em>初始创建都是由SparkContext来负责</em>的，将内存中的集合或者外部文件系统作为输入源。</p>
 
 <p><strong>3.转换操作（transformation operation）</strong> <br>
 将一个RDD<em>通过一定的操作</em>变换成另一个RDD。</p>
@@ -73,7 +104,26 @@ Spark中的行动操作基本分为两类：一类的操作结果变成Scala集�
 <p><strong>对于一个Spark数据处理程序而言，一般情况下，经过输入操作（创建操作）、转换操作、控制操作、输出操作（行动操作）来完成一个作业。</strong> <br>
 当然一个Spark应用程序中，可以有多个行动操作，也就是有多个作业存在。</p>
 
-<p><strong>二、Spark RDD</strong></p>
+<p><strong>二、Spark RDD</strong> <br>
+一个RDD代表一个被分区的只读数据集。 <br>
+一个RDD的生成只有两种途径： <br>
+（1）来自于内存集合和外部存储系统 <br>
+（2）通过转换操作来自于其他RDD（如map、filter、join等） <br>
+<strong>RDD是粗粒度的操作数据集</strong>    （每一个转换操作都会生成一个新的RDD）（一个操作会被应用在RDD的所有数据上） <br>
+<strong>所以只要通过记录下这些作用在RDD之上的转化操作，来构建RDD的继承关系（ lineage），就可以有效地进行容错处理，而不需要将实际的RDD数据进行记录拷贝</strong>  </p>
+
+<p><strong>1.RDD分区（partitions）</strong> <br>
+可以指定多少分区，也可以不指定（采用系统默认的分区数----程序所分配到的资源的CPU核的个数） <br>
+<strong>2.RDD优先位置（preferredLocations）</strong> <br>
+preferredLocations返回每一个数据块所在的机器名或者 IP地址（如果每一块数据是多份存储的，那么就会返回多个机器地址） <br>
+<strong>3.RDD依赖关系（dependencies）</strong> <br>
+<em>窄依赖</em>：每一个父RDD的分区最多只被子RDD的一个分区所使用。 <br>
+<em>宽依赖</em>：多个子RDD的分区会依赖于同一个父RDD的分区。 <br>
+org.apache.spark.<em>OneToOneDependency</em>（窄依赖）
+org.apache.spark.<em>ShuffleDependency</em> （宽依赖） <br>
+<strong>4.RDD区分计算（compute）</strong> <br>
+对于Spark中每个RDD的计算都是以partition(分区)为单位的，而且RDD中的compute函数都是在对迭代器进行复合，不需要保存每次计算的结果。 <br>
+<strong>5.RDD分区函数（partitioner）</strong>    </p>
 <!-- content end -->
 </div>
 <br>
