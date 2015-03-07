@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+[Tachyon：吞吐量超过HDFS 300多倍 来自伯克利的分布式文件系统](http://www.csdn.net/article/2013-04-18/2814947-welcome-to-berkeley-where-hadoop-isnt-nearly-fast-enough)  
+2013-04-18
+
+摘要：你的Hadoop足够快吗？美国加州大学伯克利分校的AMPLab基于Hadoop的核心组件开发出一个更快的版本Tachyon，它从底层重构了Hadoop平台。不过Tachyon的吞吐量要比HDFS高300多倍。“没有最快，只有更快”！
+
+Hadoop里的HDFS已经成为大数据的核心基础设施，觉得它还不够快？近日，美国加州大学伯克利分校的[AMPLab](https://amplab.cs.berkeley.edu/)开发的分布式文件系统[Tachyon](http://tachyon-project.org)受到了广泛关注。
+
+Tachyon（英文超光子的意思，指假想的比光还快的粒子）的特点是充分使用内存和文件对象之间的**世代（lineage）**信息，因此速度很快，项目自己号称最高比HDFS吞吐量高300倍。
+
+实际上，不仅仅是要用Tachyon试图取代HDFS，AMPLab已经完全重建了一套类似Hadoop的大数据平台，“没有最快，只有更快”。AMPLab在大数据领域最知名的产品是Spark，它是一个内存中并行处理的框架，Spark的创造者声称：使用Shark运行并行处理Job速度要比MapReduce快100倍。又因为Spark是在内存运行，所以Shark可与Druid或者SAP's HANA系统一较高下。Spark也为ClearStory下一代分析和可视化服务提供处理引擎。如果你喜欢用Hive作为Hadoop的数据仓库，那么你一定会喜欢Shark，因为它代表了“Hive on Spark”。
+
+AMPLab的最新目标就是Hadoop分布式文件系统（HDFS），不过HDFS在可用性和速度方面一直受人诟病，所以AMPLab创建了Tachyon（ 在High Scalability上非常夺目，引起了Derrick Harris的注意），**“Tachyon是一个高容错的分布式文件系统，允许文件以内存的速度在集群框架中进行可靠的共享，类似Spark和 MapReduce。通过*利用lineage信息*，积极地使用内存，Tachyon的吞吐量要比HDFS高300多倍。Tachyon都是在内存中处理缓存文件，并且让不同的 Jobs/Queries以及框架都能内存的速度来访问缓存文件”**。
+
+
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p><a href="http://www.csdn.net/article/2013-04-18/2814947-welcome-to-berkeley-where-hadoop-isnt-nearly-fast-enough">Tachyon：吞吐量超过HDFS 300多倍 来自伯克利的分布式文件系统</a> <br>
+2013-04-18</p>
+
+<p>摘要：你的Hadoop足够快吗？美国加州大学伯克利分校的AMPLab基于Hadoop的核心组件开发出一个更快的版本Tachyon，它从底层重构了Hadoop平台。不过Tachyon的吞吐量要比HDFS高300多倍。“没有最快，只有更快”！</p>
+
+<p>Hadoop里的HDFS已经成为大数据的核心基础设施，觉得它还不够快？近日，美国加州大学伯克利分校的<a href="https://amplab.cs.berkeley.edu/">AMPLab</a>开发的分布式文件系统<a href="http://tachyon-project.org">Tachyon</a>受到了广泛关注。</p>
+
+<p>Tachyon（英文超光子的意思，指假想的比光还快的粒子）的特点是充分使用内存和文件对象之间的<strong>世代（lineage）</strong>信息，因此速度很快，项目自己号称最高比HDFS吞吐量高300倍。</p>
+
+<p>实际上，不仅仅是要用Tachyon试图取代HDFS，AMPLab已经完全重建了一套类似Hadoop的大数据平台，“没有最快，只有更快”。AMPLab在大数据领域最知名的产品是Spark，它是一个内存中并行处理的框架，Spark的创造者声称：使用Shark运行并行处理Job速度要比MapReduce快100倍。又因为Spark是在内存运行，所以Shark可与Druid或者SAP's HANA系统一较高下。Spark也为ClearStory下一代分析和可视化服务提供处理引擎。如果你喜欢用Hive作为Hadoop的数据仓库，那么你一定会喜欢Shark，因为它代表了“Hive on Spark”。</p>
+
+<p>AMPLab的最新目标就是Hadoop分布式文件系统（HDFS），不过HDFS在可用性和速度方面一直受人诟病，所以AMPLab创建了Tachyon（ 在High Scalability上非常夺目，引起了Derrick Harris的注意），<strong>“Tachyon是一个高容错的分布式文件系统，允许文件以内存的速度在集群框架中进行可靠的共享，类似Spark和 MapReduce。通过<em>利用lineage信息</em>，积极地使用内存，Tachyon的吞吐量要比HDFS高300多倍。Tachyon都是在内存中处理缓存文件，并且让不同的 Jobs/Queries以及框架都能内存的速度来访问缓存文件”</strong>。</p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "tachyon.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
