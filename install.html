@@ -25,7 +25,11 @@
 	</div>
 <div id="md" style="display: none;">
 <!-- markdown -->
-1.[Ubuntu下 ssh : connect to host localhost port 22:Connection refused](http://asyty.iteye.com/blog/1440141)  
+1.[增加一个用户组用户，用于hadoop运行及访问。 ](http://developer.51cto.com/art/201306/397983.htm)   
+root@ubuntu:~# sudo addgroup hadoop  
+root@ubuntu:~# sudo adduser –ingroup hadoop hadoop  
+
+2.[Ubuntu下 ssh : connect to host localhost port 22:Connection refused](http://asyty.iteye.com/blog/1440141)  
 Ubuntu下测试ssh时使用ssh localhost 命令，出现错误提示connect to host localhost port 22:Connection refused
  
 造成这个错误的原因可能是ssh-server未安装或者未启动。ubuntu 11.10 默认安装openssh-client，但是木有安装server。
@@ -33,21 +37,24 @@ Ubuntu下测试ssh时使用ssh localhost 命令，出现错误提示connect to h
 `通过 sudo apt-get install openssh-server命令安装即可`。
 
 
-2.`第一次连接 ssh localhost会显示链接不成功，选择“继续连接”`。
-
+3.`第一次连接 ssh localhost会显示链接不成功，选择“继续连接”`。
 
 <!-- markdown end -->
 </div>
 <div class="entry" id="main">
 <!-- content -->
-<p>1.<a href="http://asyty.iteye.com/blog/1440141">Ubuntu下 ssh : connect to host localhost port 22:Connection refused</a> <br>
+<p>1.<a href="http://developer.51cto.com/art/201306/397983.htm">增加一个用户组用户，用于hadoop运行及访问。 </a> <br>
+root@ubuntu:~# sudo addgroup hadoop <br>
+root@ubuntu:~# sudo adduser –ingroup hadoop hadoop  </p>
+
+<p>2.<a href="http://asyty.iteye.com/blog/1440141">Ubuntu下 ssh : connect to host localhost port 22:Connection refused</a> <br>
 Ubuntu下测试ssh时使用ssh localhost 命令，出现错误提示connect to host localhost port 22:Connection refused</p>
 
 <p>造成这个错误的原因可能是ssh-server未安装或者未启动。ubuntu 11.10 默认安装openssh-client，但是木有安装server。</p>
 
 <p><code>通过 sudo apt-get install openssh-server命令安装即可</code>。</p>
 
-<p>2.<code>第一次连接 ssh localhost会显示链接不成功，选择“继续连接”</code>。</p>
+<p>3.<code>第一次连接 ssh localhost会显示链接不成功，选择“继续连接”</code>。</p>
 <!-- content end -->
 </div>
 <br>
