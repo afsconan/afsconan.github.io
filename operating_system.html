@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+首先，我们先来了解一下，操作系统应该安装在哪些分区里面；
+
+　　不过，一般情况下，如果您的电脑安装一个操作系统，那么，默认的，就是操作系统的文件会安装在“本地磁盘C”；如果要安装两个操作系统，系统文件应该安装到哪些盘符里面呢？
+
+一、操作系统文件安装在哪里
+　　①都放C盘
+　　如果您的C盘足够的大，大概有15G左右，那么，可以将双系统的文件都安装在C盘；一个操作系统的文件，大概占6G左右，两个就占12G，还剩下3G的自由空间。
+
+　　②两个系统分别放在不同的盘符
+　　可以将一个操作系统文件安装在C盘，而另外一个系统的文件放在D盘或其后的其它盘。
+
+二、如何将操作系统安装在相应的盘符
+①都放C盘的情况下
+　　针对这种情况，在安装第二个操作系统的时候，选择C盘分区[但是，不能进行格式化，否则原来的系统就不存在了]；之后，选择“全新安装”方式，这样，就可以在C盘同时存在两个操作系统了。
+ 
+　　两个系统同时安装在C盘，如果系统盘出问题了，那么，将会直接影响到两个操作系统；一旦两个操作系统都崩溃，那么，计算机已就崩溃了。
+ 
+②两个系统分别放在不同的盘符情况下
+　　针对这种情况，无论安装哪个操作系统，都应选择好相应的盘符，如第一个系统选择C盘，第二个系统选择D盘；
+
+　　在安装的过程中，可以对盘符进行格式化，采用“全新安装”的方法，这样，就可以将两个系统分别安装在不同的盘符了。
+ 
+　　这种安装方法，两个系统相互不会干扰，同时，一个系统崩溃了，还可以继续使用另外一个系统。
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p>首先，我们先来了解一下，操作系统应该安装在哪些分区里面；</p>
+
+<p>　　不过，一般情况下，如果您的电脑安装一个操作系统，那么，默认的，就是操作系统的文件会安装在“本地磁盘C”；如果要安装两个操作系统，系统文件应该安装到哪些盘符里面呢？</p>
+
+<p>一、操作系统文件安装在哪里
+　　①都放C盘
+　　如果您的C盘足够的大，大概有15G左右，那么，可以将双系统的文件都安装在C盘；一个操作系统的文件，大概占6G左右，两个就占12G，还剩下3G的自由空间。</p>
+
+<p>　　②两个系统分别放在不同的盘符
+　　可以将一个操作系统文件安装在C盘，而另外一个系统的文件放在D盘或其后的其它盘。</p>
+
+<p>二、如何将操作系统安装在相应的盘符
+①都放C盘的情况下
+　　针对这种情况，在安装第二个操作系统的时候，选择C盘分区[但是，不能进行格式化，否则原来的系统就不存在了]；之后，选择“全新安装”方式，这样，就可以在C盘同时存在两个操作系统了。</p>
+
+<p>　　两个系统同时安装在C盘，如果系统盘出问题了，那么，将会直接影响到两个操作系统；一旦两个操作系统都崩溃，那么，计算机已就崩溃了。</p>
+
+<p>②两个系统分别放在不同的盘符情况下
+　　针对这种情况，无论安装哪个操作系统，都应选择好相应的盘符，如第一个系统选择C盘，第二个系统选择D盘；</p>
+
+<p>　　在安装的过程中，可以对盘符进行格式化，采用“全新安装”的方法，这样，就可以将两个系统分别安装在不同的盘符了。</p>
+
+<p>　　这种安装方法，两个系统相互不会干扰，同时，一个系统崩溃了，还可以继续使用另外一个系统。</p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "operating_system.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
