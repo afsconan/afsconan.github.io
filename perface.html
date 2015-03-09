@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+Spark采用一个统一的技术堆栈解决了云计算大数据的如流处理、图技术、机器学习、NoSQL查询等方面的所有核心问题，具有完善的生态系统，这直接奠定了其一统云计算大数据领域的霸主地位；
+
+要想成为Spark高手，需要经历六大阶段
+![](http://s8.51cto.com/wyfs02/M00/45/FF/wKiom1PtlOeCBvedAAB6Nt0y32g066.jpg)
+Spark实战高手之核心技能点
+![](http://s8.51cto.com/wyfs02/M01/45/FF/wKiom1PtlP7R4iQ7AACppwTaqwM920.jpg)
+
+**第一阶段：熟练的掌握Scala语言**
+
+1. Spark框架是采用Scala语言编写的，精致而优雅。要想成为Spark高手，你就必须阅读Spark的源代码，就必须掌握Scala,；
+
+2. 虽然说现在的Spark可以采用多语言Java、Python等进行应用程序开发，但是最快速的和支持最好的开发API依然并将永远是Scala方式的API，所以你必须掌握Scala来编写复杂的和高性能的Spark分布式程序；
+
+3. 尤其要熟练掌握Scala的trait、apply、函数式编程、泛型、逆变与协变等；
+
+推荐课程：”精通Spark的开发语言：Scala最佳实践”
+
+**第二阶段：精通Spark平台本身提供给开发者API**
+
+1. 掌握Spark中面向RDD的开发模式，掌握各种transformation和action函数的使用；
+
+2. 掌握Spark中的宽依赖和窄依赖以及lineage机制；
+
+3. 掌握RDD的计算流程，例如Stage的划分、Spark应用程序提交给集群的基本过程和Worker节点基础的工作原理等
+
+推荐课程：“18小时内掌握Spark：把云计算大数据速度提高100倍以上!”
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p>Spark采用一个统一的技术堆栈解决了云计算大数据的如流处理、图技术、机器学习、NoSQL查询等方面的所有核心问题，具有完善的生态系统，这直接奠定了其一统云计算大数据领域的霸主地位；</p>
+
+<p>要想成为Spark高手，需要经历六大阶段
+<img src="http://s8.51cto.com/wyfs02/M00/45/FF/wKiom1PtlOeCBvedAAB6Nt0y32g066.jpg" alt="" title="">
+Spark实战高手之核心技能点
+<img src="http://s8.51cto.com/wyfs02/M01/45/FF/wKiom1PtlP7R4iQ7AACppwTaqwM920.jpg" alt="" title=""></p>
+
+<p><strong>第一阶段：熟练的掌握Scala语言</strong></p>
+
+<ol>
+<li><p>Spark框架是采用Scala语言编写的，精致而优雅。要想成为Spark高手，你就必须阅读Spark的源代码，就必须掌握Scala,；</p></li>
+<li><p>虽然说现在的Spark可以采用多语言Java、Python等进行应用程序开发，但是最快速的和支持最好的开发API依然并将永远是Scala方式的API，所以你必须掌握Scala来编写复杂的和高性能的Spark分布式程序；</p></li>
+<li><p>尤其要熟练掌握Scala的trait、apply、函数式编程、泛型、逆变与协变等；</p></li>
+</ol>
+
+<p>推荐课程：”精通Spark的开发语言：Scala最佳实践”</p>
+
+<p><strong>第二阶段：精通Spark平台本身提供给开发者API</strong></p>
+
+<ol>
+<li><p>掌握Spark中面向RDD的开发模式，掌握各种transformation和action函数的使用；</p></li>
+<li><p>掌握Spark中的宽依赖和窄依赖以及lineage机制；</p></li>
+<li><p>掌握RDD的计算流程，例如Stage的划分、Spark应用程序提交给集群的基本过程和Worker节点基础的工作原理等</p></li>
+</ol>
+
+<p>推荐课程：“18小时内掌握Spark：把云计算大数据速度提高100倍以上!”</p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "perface.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
