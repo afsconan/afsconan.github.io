@@ -1,0 +1,324 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+1：Spark生态和安装部署  
+什么是Spark  
+Spark有什么  
+安装部署  
+  &emsp; Spark安装简介  
+   &emsp; Spark的源码编译  
+  &emsp; Spark Standalone安装  
+  &emsp; Spark Standalone HA安装    
+Spark工具  
+ &emsp;  Spark交互式工具spark-shell  
+ &emsp;  Spark应用程序部署工具spark-submit  
+
+2：Spark编程模型和解析    
+Spark的编程模型      
+ &emsp;  RDD的特点、操作、依赖关系    
+ &emsp;  缓存策略  
+ &emsp;  广播变量和累加器  
+Spark编程环境搭建  
+Spark编程实例  
+
+3：Spark运行架构和解析    
+Spark的运行架构    
+ &emsp;  基本术语    
+  &emsp; 运行架构（DAGScheduler、TaskSeduler、Task、容错性、推测机制、数据本地性）    
+ &emsp;  Spark on Standalone运行过程    
+ &emsp;  Spark on YARN 运行过程    
+Spark实例演示    
+  &emsp; Spark on Standalone实例演示    
+  &emsp; Spark on YARN实例演示    
+  
+4：不得不说的hive  
+hive的运行架构  
+hive的安装  
+hive的实例演示  
+shark的简介  
+
+5：SparkSQL原理和实践  
+Spark的运行架构  
+ &emsp;  Catalyst  
+ &emsp;  sqlontext  
+ &emsp;  hiveContext  
+ThriftServer和CLI  
+ &emsp;  ThriftServer  
+  &emsp; CLI  
+SparkSQL的实例演示和编程  
+ &emsp;  spark-shell实例演示  
+ &emsp;  spark-sql实例演示  
+ &emsp;  SparkSQL的编程  
+
+6：SparkStreaming原理和实践  
+SparkStreaming原理  
+ &emsp;  SparkStreaming的原理  
+ &emsp;  SparkStreaming的运行方式    
+ &emsp;  DStream的特点和操作  
+SparkStreaming实例演示  
+ &emsp;  网络数据演示  
+ &emsp;  文本实例演示  
+  &emsp; Window操作演示    
+  
+7：MLlib入门  
+什么是机器学习  
+MLlib的架构  
+Mllib实例演示  
+ &emsp;  聚类算法演示  
+ &emsp;  推荐系统演示      
+
+8：GraphX入门  
+图论基础  
+GraphX的架构  
+GraphX实例演示  
+ &emsp;  图的基本操作  
+ &emsp;  PageRank演示  
+
+9：Spark运维（上）   
+Spark On YARN   
+Spark On Docker  
+
+10：Spark运维（下）  
+Spark配置  
+history server  
+job server  
+Spark的监控  
+  &emsp; Spark UI监控  
+  &emsp; Ganglia 监控  
+
+11：Spark调优  
+序化  
+压缩  
+数据倾斜等等  
+实例演示  
+
+12：scala on Spark  
+spark常用的scala基础  
+如何阅读spark源代码  
+如何构建spark项目  
+
+13：Spark编程  
+RDD的编程  
+Spark综合实例（SparkSQL+sparkMlib+redis+R）  
+
+14：Spark源码研读  
+Spark源码总体介绍  
+SparkCore源码细解    
+Spark Examples介绍  
+
+15：杂谈
+Spark相关项目  
+ &emsp;  BlinkDB简介  
+ &emsp;  SparkR的安装和实例  
+ &emsp;  Tachyon  
+Spark的优秀网站、博客、牛人介绍  
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p>1：Spark生态和安装部署 <br>
+什么是Spark <br>
+Spark有什么 <br>
+安装部署 <br>
+    Spark安装简介 <br>
+     Spark的源码编译 <br>
+    Spark Standalone安装 <br>
+    Spark Standalone HA安装 <br>
+Spark工具 <br>
+    Spark交互式工具spark-shell <br>
+    Spark应用程序部署工具spark-submit  </p>
+
+<p>2：Spark编程模型和解析 <br>
+Spark的编程模型 <br>
+    RDD的特点、操作、依赖关系 <br>
+    缓存策略 <br>
+    广播变量和累加器 <br>
+Spark编程环境搭建 <br>
+Spark编程实例  </p>
+
+<p>3：Spark运行架构和解析 <br>
+Spark的运行架构 <br>
+    基本术语 <br>
+    运行架构（DAGScheduler、TaskSeduler、Task、容错性、推测机制、数据本地性） <br>
+    Spark on Standalone运行过程 <br>
+    Spark on YARN 运行过程 <br>
+Spark实例演示 <br>
+    Spark on Standalone实例演示 <br>
+    Spark on YARN实例演示    </p>
+
+<p>4：不得不说的hive <br>
+hive的运行架构 <br>
+hive的安装 <br>
+hive的实例演示 <br>
+shark的简介  </p>
+
+<p>5：SparkSQL原理和实践 <br>
+Spark的运行架构 <br>
+    Catalyst <br>
+    sqlontext <br>
+    hiveContext <br>
+ThriftServer和CLI <br>
+    ThriftServer <br>
+    CLI <br>
+SparkSQL的实例演示和编程 <br>
+    spark-shell实例演示 <br>
+    spark-sql实例演示 <br>
+    SparkSQL的编程  </p>
+
+<p>6：SparkStreaming原理和实践 <br>
+SparkStreaming原理 <br>
+    SparkStreaming的原理 <br>
+    SparkStreaming的运行方式 <br>
+    DStream的特点和操作 <br>
+SparkStreaming实例演示 <br>
+    网络数据演示 <br>
+    文本实例演示 <br>
+    Window操作演示    </p>
+
+<p>7：MLlib入门 <br>
+什么是机器学习 <br>
+MLlib的架构 <br>
+Mllib实例演示 <br>
+    聚类算法演示 <br>
+    推荐系统演示      </p>
+
+<p>8：GraphX入门 <br>
+图论基础 <br>
+GraphX的架构 <br>
+GraphX实例演示 <br>
+    图的基本操作 <br>
+    PageRank演示  </p>
+
+<p>9：Spark运维（上） <br>
+Spark On YARN <br>
+Spark On Docker  </p>
+
+<p>10：Spark运维（下） <br>
+Spark配置 <br>
+history server <br>
+job server <br>
+Spark的监控 <br>
+    Spark UI监控 <br>
+    Ganglia 监控  </p>
+
+<p>11：Spark调优 <br>
+序化 <br>
+压缩 <br>
+数据倾斜等等 <br>
+实例演示  </p>
+
+<p>12：scala on Spark <br>
+spark常用的scala基础 <br>
+如何阅读spark源代码 <br>
+如何构建spark项目  </p>
+
+<p>13：Spark编程 <br>
+RDD的编程 <br>
+Spark综合实例（SparkSQL+sparkMlib+redis+R）  </p>
+
+<p>14：Spark源码研读 <br>
+Spark源码总体介绍 <br>
+SparkCore源码细解 <br>
+Spark Examples介绍  </p>
+
+<p>15：杂谈
+Spark相关项目 <br>
+    BlinkDB简介 <br>
+    SparkR的安装和实例 <br>
+    Tachyon <br>
+Spark的优秀网站、博客、牛人介绍  </p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "course_record.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
