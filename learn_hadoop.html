@@ -25,24 +25,40 @@
 	</div>
 <div id="md" style="display: none;">
 <!-- markdown -->
-Hadoop是Apache基金会下的项目，它能够处理非常大的数据集在分布式计算环境，它可以运行在三种模式下：    
+`Hadoop`是Apache基金会下的项目，它能够处理非常大的数据集在分布式计算环境，它`可以运行在三种模式下`：    
 **独立式**    
 Hadoop运行所有的东西在无后台的单独的JVM中，这种模式适合在开发阶段测试与Debug MapReduce程序    
 **伪分布式**    
 Hadoop做为后台应用运行在本地机器，模拟小集群    
 **全分布式**    
 Hadoop做为后台应用运行真实的集群电脑中    
+
+
+`Spark有以下四种运行模式`：
+
+ **local**: 本地单进程模式，用于本地开发测试Spark代码   
+**standalone**：分布式集群模式，Master-Worker架构，Master负责调度，Worker负责具体Task的执行  
+**on yarn/mesos**: ‌运行在yarn/mesos等资源管理框架之上，yarn/mesos提供资源管理，spark提供计算调度，并可与其他计算框架(如MapReduce/MPI/Storm)共同运行在同一个集群之上  
+**on cloud(EC2)**: 运行在AWS的EC2之上  
+
 <!-- markdown end -->
 </div>
 <div class="entry" id="main">
 <!-- content -->
-<p>Hadoop是Apache基金会下的项目，它能够处理非常大的数据集在分布式计算环境，它可以运行在三种模式下： <br>
+<p><code>Hadoop</code>是Apache基金会下的项目，它能够处理非常大的数据集在分布式计算环境，它<code>可以运行在三种模式下</code>： <br>
 <strong>独立式</strong> <br>
 Hadoop运行所有的东西在无后台的单独的JVM中，这种模式适合在开发阶段测试与Debug MapReduce程序 <br>
 <strong>伪分布式</strong> <br>
 Hadoop做为后台应用运行在本地机器，模拟小集群 <br>
 <strong>全分布式</strong> <br>
 Hadoop做为后台应用运行真实的集群电脑中    </p>
+
+<p><code>Spark有以下四种运行模式</code>：</p>
+
+<p><strong>local</strong>: 本地单进程模式，用于本地开发测试Spark代码 <br>
+<strong>standalone</strong>：分布式集群模式，Master-Worker架构，Master负责调度，Worker负责具体Task的执行 <br>
+<strong>on yarn/mesos</strong>: ‌运行在yarn/mesos等资源管理框架之上，yarn/mesos提供资源管理，spark提供计算调度，并可与其他计算框架(如MapReduce/MPI/Storm)共同运行在同一个集群之上 <br>
+<strong>on cloud(EC2)</strong>: 运行在AWS的EC2之上  </p>
 <!-- content end -->
 </div>
 <br>
