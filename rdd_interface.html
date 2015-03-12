@@ -49,7 +49,7 @@ checkpoint()      &emsp;      checkpoint会割断此RDD之前的依赖关系，�
 由于Spark是惰性计算的，所以对于任何RDD进行行动操作，都会触发Spark作业的运行，从而产生最终的结果。   
 Spark中的行动操作基本分为两类：一类的操作结果变成Scala集合或者标量，另一类就将RDD保存到外部文件或者数据库系统中。
 
-**(1)集合标量行动操作**［行动操作将标量活着集合返回给Spark的客户端程序］  
+**(1)集合标量行动操作**［行动操作将标量或者集合返回给Spark的客户端程序］  
 first  
 count  
 reduce(f:(T,T)=>T)  对RDD中的元素进行二元计算，返回计算结果  
@@ -59,13 +59,30 @@ take(num:Int)
 top(num:Int)    
 takeOrdered(num:Int) &emsp; 以与top相反的排序规则返回
 
-aggregate[U](zeroValue:U)(seqOp:(U,T)=>U,combOp(U,U)=>U)
+aggregate\[U](zeroValue:U)(seqOp:(U,T)=>U,combOp(U,U)=>U)
 
-fold(zerovalue:T)(op:(T,T)=>T)
+fold(zerovalue:T)(op:(T,T)=>T)  &emsp;   fold是aggregate的便利接口  
 
+lookup(key:K):Seq[V]  &emsp;  针对(K,V)类型的RDD的行动操作，对于给定的键值，返回与此键值相对应的所有值。
+  
 
+**(2)存储行动操作** ［行动操作将RDD直接保存到外部文件系统或者数据库中］
 
-**(2)存储行动操作** ［行动操作将RDD直接保存到外部文件系统活着数据库中］
+将RDD存储到外部介质的旧版本API:
+saveAsTextFile(...)  
+saveAsTextFile(...)  
+saveAsObjectFile(...)  
+saveAsHadoopFile(...)  
+saveAsHadoopFile(...)  
+saveAsHadoopFile(...)  
+outputFormatClass: Class...  
+saveAsHadoopDataset(conf:JobConf)  
+
+新版本Hadoop API:  
+saveAsNewAPIHadoopFile(…)  
+saveAsNewAPIHadoopFile(…)  
+saveAsNewAPIHadoopDataset(conf:Configuration)  
+
 
 **对于一个Spark数据处理程序而言，一般情况下，经过输入操作（创建操作）、转换操作、控制操作、输出操作（行动操作）来完成一个作业。**  
 当然一个Spark应用程序中，可以有多个行动操作，也就是有多个作业存在。
@@ -107,7 +124,6 @@ partitioner这个属性，只存在于（K,V）类型的RDD中，对于非（K,V
 
 
 
-
 <!-- markdown end -->
 </div>
 <div class="entry" id="main">
@@ -135,7 +151,7 @@ persist(level:StorageLevel):RDD[T]  </p>
 由于Spark是惰性计算的，所以对于任何RDD进行行动操作，都会触发Spark作业的运行，从而产生最终的结果。 <br>
 Spark中的行动操作基本分为两类：一类的操作结果变成Scala集合或者标量，另一类就将RDD保存到外部文件或者数据库系统中。</p>
 
-<p><strong>(1)集合标量行动操作</strong>［行动操作将标量活着集合返回给Spark的客户端程序］ <br>
+<p><strong>(1)集合标量行动操作</strong>［行动操作将标量或者集合返回给Spark的客户端程序］ <br>
 first <br>
 count <br>
 reduce(f:(T,T)=&gt;T)  对RDD中的元素进行二元计算，返回计算结果  </p>
@@ -145,11 +161,28 @@ take(num:Int) <br>
 top(num:Int) <br>
 takeOrdered(num:Int)   以与top相反的排序规则返回</p>
 
-<p>aggregate<a href="zeroValue:U">U</a>(seqOp:(U,T)=&gt;U,combOp(U,U)=&gt;U)</p>
+<p>aggregate[U](zeroValue:U)(seqOp:(U,T)=&gt;U,combOp(U,U)=&gt;U)</p>
 
-<p>fold(zerovalue:T)(op:(T,T)=&gt;T)</p>
+<p>fold(zerovalue:T)(op:(T,T)=&gt;T)      fold是aggregate的便利接口  </p>
 
-<p><strong>(2)存储行动操作</strong> ［行动操作将RDD直接保存到外部文件系统活着数据库中］</p>
+<p>lookup(key:K):Seq[V]     针对(K,V)类型的RDD的行动操作，对于给定的键值，返回与此键值相对应的所有值。</p>
+
+<p><strong>(2)存储行动操作</strong> ［行动操作将RDD直接保存到外部文件系统或者数据库中］</p>
+
+<p>将RDD存储到外部介质的旧版本API:
+saveAsTextFile(...) <br>
+saveAsTextFile(...) <br>
+saveAsObjectFile(...) <br>
+saveAsHadoopFile(...) <br>
+saveAsHadoopFile(...) <br>
+saveAsHadoopFile(...) <br>
+outputFormatClass: Class... <br>
+saveAsHadoopDataset(conf:JobConf)  </p>
+
+<p>新版本Hadoop API: <br>
+saveAsNewAPIHadoopFile(…) <br>
+saveAsNewAPIHadoopFile(…) <br>
+saveAsNewAPIHadoopDataset(conf:Configuration)  </p>
 
 <p><strong>对于一个Spark数据处理程序而言，一般情况下，经过输入操作（创建操作）、转换操作、控制操作、输出操作（行动操作）来完成一个作业。</strong> <br>
 当然一个Spark应用程序中，可以有多个行动操作，也就是有多个作业存在。</p>
