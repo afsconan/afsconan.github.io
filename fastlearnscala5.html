@@ -1,0 +1,442 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+第5章 类
+
+5.1 简单类和无参方法
+class Counter
+{
+  private var value=0  //必须初始化字段
+  def increment() { value+=1 }//方法默认是公有的
+  def current()=value
+}
+
+【在scala中，类不声明为public】
+【scala源文件可以包含多个类，所有这些类都具有公有可见性】
+
+【如何构造对象，和调用方法】
+val myCounter=new Counter  //或new Counter()
+myCounter.increment()
+println(myCounter.current)
+
+【调用无参方法时，可以写上圆括号，也可以不写】
+对于改值器方法（改变对象状态的方法），使用（）
+对于取值器方法（不会改变对象状态的方法），去掉（）
+
+【可以通过不带（）的方式声明方法，来强制这种风格】【P52】
+
+5.2 带getter和setter的属性
+在Java中，
+public class Person
+{
+  private int age;
+  public int getAge()  { return age; }
+  public void setAge(int newValue) 
+ { 
+    if(newValue>age)
+       age=newValue; 
+  }
+}
+
+像这样的一对getter/setter通常被称做属性（property）。
+--------------------------------------------
+【之所以说getter和setter方法比其他方法好】
+是因为它们让你可以从简单的get/set机制出发，并在需要的时候做改进。
+--------------------------------------------
+【Scala对每个字段都提供getter和setter方法。】
+
+class Person
+{
+  var age=0
+}
+
+Scala生成面向JVM的类，其中有一个private的age字段和public的getter和setter方法。
+如果age声明为private，则是private的getter和setter方法。
+
+【在Scala中，getter和setter分别叫做age和age_=。】
+
+println(fred.age)  //调用方法fred.age()
+fred.age=21    //调用方法fred.age=(21)
+
+【第5.5节，介绍如何生成Java风格的getXxx和setXxx方法，以使得你的Scala类可以与Java工具实现互操作】
+
+class Person
+{
+  private var privateAge=0  //变成私有并改名
+  
+  def age = privateAge
+  def age_= (newValue:Int)
+  {
+     if(newValue>privateAge) 
+         privateAge=newValue;
+  }
+}
+
+【统一访问原则】
+“某个模块提供的所有服务都应该能通过统一的表示法访问到，至于它们是通过存储还是通过计算来实现的，从访问方式上应无从获知”。
+
+在Scala中，fred.age的调用者并不知道age是通过字段还是方法来实现的。
+
+【Scala对每个字段生成getter和setter方法听上去有些恐怖，但你可以控制这个过程】
+-如果字段是private的，则getter和setter方法也是私有的。
+-如果字段是val，则只有getter方法被生成。
+-如果不需要任何getter或setter，可将字段声明为private[this]
+
+
+举例：
+1.
+class Message
+{
+  val timeStamp=new java.util.Date
+  ...
+}
+
+【只读属性】生成私有的final字段和一个getter方法，没有setter。
+
+2.
+class Counter
+{
+  private var value=0
+  def increment() { value+=1 }
+  def current = value
+}
+
+客户端不能随意改值，但可以通过某种其他的方式被改变。
+
+3.
+class Counter
+{
+  private var value=0
+  def increment() { value+=1 }
+  def isLess(other:Counter)=value<**other**\.value//可以访问另一个对象的私有字段
+}
+
+【对象私有】   
+private[this] var value=0
+这样定义，Counter类的方法只能访问当前对象的value字段，而不能访问同样是Counter类型的其他对象的该字段。这样的访问称为**对象私有**。
+【对于对象私有（private[this]）的字段，Scala根本不会生成getter和setter方法】
+【对于类私有（private）的字段，Scala会生成私有的getter和setter方法】
+
+【小结】
+当你在Scala类中看到字段的时候，它是一个私有字段，加上getter（对于val字段而言）或者getter和setter方法（对var字段而言）。
+
+5.5 Bean属性【L1】
+**[JavaBeans规范](www.oracle.com/technetwork/java/javase/tech/index-jsp-138795.html "optional title")把Java属性定义为一对getFoo/setFoo方法（或者对于只读属性而言，单个getFoo方法）**。许多Java工具都依赖这样的命名习惯。
+-------------------------------------------------
+将Scala字段标注为@BeanProperty时，这样的方法会自动生成。
+import scala.reflect.BeanProperty
+class Person
+{
+  @BeanProperty var name: String = _
+}
+将会生成四个方法：
+1.name:String
+2.name_=(newValue:String):Unit
+3.getName():String
+4.setName(newValue:String):Unit
+
+
+表5-1  针对字段生成的方法（在各种情况下哪些方法会被生成）【P58】
+
+【如果你以主构造器参数的方式定义了某字段，并且你需要JavaBeans版的getter和setter方法】给构造器参数加上注解：class Person(@BeanProperty var name:String)
+
+5.6 辅助构造器（auxiliary constructor）
+1.辅助构造器的名称为this。
+2.每一个辅助构造器都必须以一个对先前已定义的其他辅助构造器或主构造器的调用开始。
+class Person
+{
+  private var name=""
+  private var age=0
+  
+  def this(name:String)//一个辅助构造器
+  {
+     this()
+     this.name=name  
+  }
+  def this(name:String,age:Int)//另一个辅助构造器
+  {
+     this()     //调用主构造器
+     this.age=age
+  }
+}
+
+
+5.7 主构造器（primary constructor）
+在Scala中，每个类都有主构造器。主构造器与类定义交织在一起。
+1.主构造器的参数直接放置在类名之后。
+  class Person(val name:String,val age:Int)
+  { ... }
+  
+
+5.8 嵌套类【L1】
+
+
+
+
+
+
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p>第5章 类</p>
+
+<p>5.1 简单类和无参方法
+class Counter
+{
+  private var value=0  //必须初始化字段
+  def increment() { value+=1 }//方法默认是公有的
+  def current()=value
+}</p>
+
+<p>【在scala中，类不声明为public】
+【scala源文件可以包含多个类，所有这些类都具有公有可见性】</p>
+
+<p>【如何构造对象，和调用方法】
+val myCounter=new Counter  //或new Counter()
+myCounter.increment()
+println(myCounter.current)</p>
+
+<p>【调用无参方法时，可以写上圆括号，也可以不写】
+对于改值器方法（改变对象状态的方法），使用（）
+对于取值器方法（不会改变对象状态的方法），去掉（）</p>
+
+<p>【可以通过不带（）的方式声明方法，来强制这种风格】【P52】</p>
+
+<p>5.2 带getter和setter的属性
+在Java中，
+public class Person
+{
+  private int age;
+  public int getAge()  { return age; }
+  public void setAge(int newValue) 
+ { 
+    if(newValue&gt;age)
+       age=newValue; 
+  }
+}</p>
+
+<h2 id="gettersetterproperty">像这样的一对getter/setter通常被称做属性（property）。</h2>
+
+<p>【之所以说getter和setter方法比其他方法好】</p>
+
+<h2 id="getset">是因为它们让你可以从简单的get/set机制出发，并在需要的时候做改进。</h2>
+
+<p>【Scala对每个字段都提供getter和setter方法。】</p>
+
+<p>class Person
+{
+  var age=0
+}</p>
+
+<p>Scala生成面向JVM的类，其中有一个private的age字段和public的getter和setter方法。
+如果age声明为private，则是private的getter和setter方法。</p>
+
+<p>【在Scala中，getter和setter分别叫做age和age_=。】</p>
+
+<p>println(fred.age)  //调用方法fred.age()
+fred.age=21    //调用方法fred.age=(21)</p>
+
+<p>【第5.5节，介绍如何生成Java风格的getXxx和setXxx方法，以使得你的Scala类可以与Java工具实现互操作】</p>
+
+<p>class Person
+{
+  private var privateAge=0  //变成私有并改名</p>
+
+<p>def age = privateAge
+  def age_= (newValue:Int)
+  {
+     if(newValue&gt;privateAge) 
+         privateAge=newValue;
+  }
+}</p>
+
+<p>【统一访问原则】
+“某个模块提供的所有服务都应该能通过统一的表示法访问到，至于它们是通过存储还是通过计算来实现的，从访问方式上应无从获知”。</p>
+
+<p>在Scala中，fred.age的调用者并不知道age是通过字段还是方法来实现的。</p>
+
+<p>【Scala对每个字段生成getter和setter方法听上去有些恐怖，但你可以控制这个过程】
+-如果字段是private的，则getter和setter方法也是私有的。
+-如果字段是val，则只有getter方法被生成。
+-如果不需要任何getter或setter，可将字段声明为private[this]</p>
+
+<p>举例：
+1.
+class Message
+{
+  val timeStamp=new java.util.Date
+  ...
+}</p>
+
+<p>【只读属性】生成私有的final字段和一个getter方法，没有setter。</p>
+
+<p>2.
+class Counter
+{
+  private var value=0
+  def increment() { value+=1 }
+  def current = value
+}</p>
+
+<p>客户端不能随意改值，但可以通过某种其他的方式被改变。</p>
+
+<p>3.
+class Counter
+{
+  private var value=0
+  def increment() { value+=1 }
+  def isLess(other:Counter)=value&lt;<strong>other</strong>.value//可以访问另一个对象的私有字段
+}</p>
+
+<p>【对象私有】 <br>
+private[this] var value=0
+这样定义，Counter类的方法只能访问当前对象的value字段，而不能访问同样是Counter类型的其他对象的该字段。这样的访问称为<strong>对象私有</strong>。
+【对于对象私有（private[this]）的字段，Scala根本不会生成getter和setter方法】
+【对于类私有（private）的字段，Scala会生成私有的getter和setter方法】</p>
+
+<p>【小结】
+当你在Scala类中看到字段的时候，它是一个私有字段，加上getter（对于val字段而言）或者getter和setter方法（对var字段而言）。</p>
+
+<p>5.5 Bean属性【L1】</p>
+
+<h2 id="javabeanswwworaclecomtechnetworkjavajavasetechindexjsp138795htmloptionaltitlejavagetfoosetfoogetfoojava"><strong><a href="www.oracle.com/technetwork/java/javase/tech/index-jsp-138795.html" title="optional title">JavaBeans规范</a>把Java属性定义为一对getFoo/setFoo方法（或者对于只读属性而言，单个getFoo方法）</strong>。许多Java工具都依赖这样的命名习惯。</h2>
+
+<p>将Scala字段标注为@BeanProperty时，这样的方法会自动生成。
+import scala.reflect.BeanProperty
+class Person
+{
+  @BeanProperty var name: String = _
+}
+将会生成四个方法：
+1.name:String
+2.name_=(newValue:String):Unit
+3.getName():String
+4.setName(newValue:String):Unit</p>
+
+<p>表5-1  针对字段生成的方法（在各种情况下哪些方法会被生成）【P58】</p>
+
+<p>【如果你以主构造器参数的方式定义了某字段，并且你需要JavaBeans版的getter和setter方法】给构造器参数加上注解：class Person(@BeanProperty var name:String)</p>
+
+<p>5.6 辅助构造器（auxiliary constructor）
+1.辅助构造器的名称为this。
+2.每一个辅助构造器都必须以一个对先前已定义的其他辅助构造器或主构造器的调用开始。
+class Person
+{
+  private var name=""
+  private var age=0</p>
+
+<p>def this(name:String)//一个辅助构造器
+  {
+     this()
+     this.name=name <br>
+  }
+  def this(name:String,age:Int)//另一个辅助构造器
+  {
+     this()     //调用主构造器
+     this.age=age
+  }
+}</p>
+
+<p>5.7 主构造器（primary constructor）
+在Scala中，每个类都有主构造器。主构造器与类定义交织在一起。
+1.主构造器的参数直接放置在类名之后。
+  class Person(val name:String,val age:Int)
+  { ... }</p>
+
+<p>5.8 嵌套类【L1】</p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "fastlearnscala5.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
