@@ -119,6 +119,9 @@ subtractByKey(…)  只是针对RDD[K,V]中K值来进行操作
 subtractByKey(…)  
 subtractByKey(…)  
 
+
+PageRank RDD内部依赖关系[P44]
+
 **4.控制操作  （control operation）**  
 对RDD进行持久化，可以*让RDD保存在磁盘或者内存中*，以便后续重复使用。  
 
@@ -196,7 +199,6 @@ org.apache.spark.*ShuffleDependency* （宽依赖）
 HashPatitioner（哈希分区）和RangePatitioner（区域分区）
 
 partitioner这个属性，只存在于（K,V）类型的RDD中，对于非（K,V）类型的partitioner的值就是None。
-
 
 
 
@@ -302,6 +304,8 @@ rightOuterJoin(…) <br>
 subtractByKey(…)  只是针对RDD[K,V]中K值来进行操作 <br>
 subtractByKey(…) <br>
 subtractByKey(…)  </p>
+
+<p>PageRank RDD内部依赖关系[P44]</p>
 
 <p><strong>4.控制操作  （control operation）</strong> <br>
 对RDD进行持久化，可以<em>让RDD保存在磁盘或者内存中</em>，以便后续重复使用。  </p>
