@@ -36,8 +36,8 @@ Spark中提供了parallelize和makeRDD两类函数来实现从集合生成RDD（
 **(2)存储创建操作**  
 Spark的整个生态系统与Hadoop是完全兼容的，所以对于Hadoop所支持的文件类型或者数据库类型，Spark也同样支持。  
 由于Hadoop的API有新旧两个版本，Spark为了能够兼容Hadoop所有版本，也提供了两套创建操作接口。 
-对于外部存储创建操作而言，hadoopRDD和newHadoopRDD是最为抽象的两个函数接口。
-兼容旧版本Hadoop API的创建操作
+对于外部存储创建操作而言，hadoopRDD和newHadoopRDD是最为抽象的两个函数接口。  
+兼容旧版本Hadoop API的创建操作  
 textFile()    
 hadoopFile…    
 hadoopFile...      
@@ -74,7 +74,7 @@ subtract()
 mapPartitions()  与map转换操作类似，只不过映射函数的输入参数由RDD中的每一个元素变成了RDD中每一个分区的迭代器  
 mapPartitionsWithIndex()  
 
-zip(…)  将两个RDD组合成Key/Value形式的RDD
+zip(…)  将两个RDD组合成Key/Value形式的RDD  
 zipPartitions(…)  将多个RDD按照partition组合成为新的RDD
 zipPartitions(…)   
 zipPartitions(…)  
@@ -85,10 +85,10 @@ zipPartitions(…)
 zipWithIndex()  将RDD中的元素和这个元素的ID组合成键/值对
 zipWithUniqueId()  将RDD中的元素和一个唯一ID组合成键/值对
 
-**(2)键值RDD转换操作**
-partitionBy()  根据partitioner函数生成新的ShuffledRDD，将原RDD重新分区
-mapValues()  针对[K,V]中的V值进行map操作
-flatMapValues()  针对[K,V]中的V值进行flatMap操作
+**(2)键值RDD转换操作**  
+partitionBy()  根据partitioner函数生成新的ShuffledRDD，将原RDD重新分区  
+mapValues()  针对[K,V]中的V值进行map操作  
+flatMapValues()  针对[K,V]中的V值进行flatMap操作  
 
 combineByKey(…) 将RDD[K,V]转化成返回类型RDD[K,C],这里V类型与C类型可以相同也可以不同  
 combineByKey(…)  
@@ -221,8 +221,8 @@ Spark中提供了parallelize和makeRDD两类函数来实现从集合生成RDD（
 <strong>(2)存储创建操作</strong> <br>
 Spark的整个生态系统与Hadoop是完全兼容的，所以对于Hadoop所支持的文件类型或者数据库类型，Spark也同样支持。 <br>
 由于Hadoop的API有新旧两个版本，Spark为了能够兼容Hadoop所有版本，也提供了两套创建操作接口。 
-对于外部存储创建操作而言，hadoopRDD和newHadoopRDD是最为抽象的两个函数接口。
-兼容旧版本Hadoop API的创建操作
+对于外部存储创建操作而言，hadoopRDD和newHadoopRDD是最为抽象的两个函数接口。 <br>
+兼容旧版本Hadoop API的创建操作 <br>
 textFile() <br>
 hadoopFile… <br>
 hadoopFile... <br>
@@ -258,7 +258,7 @@ subtract()  </p>
 <p>mapPartitions()  与map转换操作类似，只不过映射函数的输入参数由RDD中的每一个元素变成了RDD中每一个分区的迭代器 <br>
 mapPartitionsWithIndex()  </p>
 
-<p>zip(…)  将两个RDD组合成Key/Value形式的RDD
+<p>zip(…)  将两个RDD组合成Key/Value形式的RDD <br>
 zipPartitions(…)  将多个RDD按照partition组合成为新的RDD
 zipPartitions(…) <br>
 zipPartitions(…) <br>
@@ -269,10 +269,10 @@ zipPartitions(…)  </p>
 <p>zipWithIndex()  将RDD中的元素和这个元素的ID组合成键/值对
 zipWithUniqueId()  将RDD中的元素和一个唯一ID组合成键/值对</p>
 
-<p><strong>(2)键值RDD转换操作</strong>
-partitionBy()  根据partitioner函数生成新的ShuffledRDD，将原RDD重新分区
-mapValues()  针对[K,V]中的V值进行map操作
-flatMapValues()  针对[K,V]中的V值进行flatMap操作</p>
+<p><strong>(2)键值RDD转换操作</strong> <br>
+partitionBy()  根据partitioner函数生成新的ShuffledRDD，将原RDD重新分区 <br>
+mapValues()  针对[K,V]中的V值进行map操作 <br>
+flatMapValues()  针对[K,V]中的V值进行flatMap操作  </p>
 
 <p>combineByKey(…) 将RDD[K,V]转化成返回类型RDD[K,C],这里V类型与C类型可以相同也可以不同 <br>
 combineByKey(…) <br>
