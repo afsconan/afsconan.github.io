@@ -34,9 +34,90 @@ RDD的*初始创建都是由SparkContext来负责*的，将内存中的集合或
 **(1)集合创建操作**  
 Spark中提供了parallelize和makeRDD两类函数来实现从集合生成RDD（两者不同之处，makeRDD还提供了一个可以指定每一个分区preferredLocations参数的实现版本）   
 **(2)存储创建操作**  
+Spark的整个生态系统与Hadoop是完全兼容的，所以对于Hadoop所支持的文件类型或者数据库类型，Spark也同样支持。  
+由于Hadoop的API有新旧两个版本，Spark为了能够兼容Hadoop所有版本，也提供了两套创建操作接口。 
+对于外部存储创建操作而言，hadoopRDD和newHadoopRDD是最为抽象的两个函数接口。
+兼容旧版本Hadoop API的创建操作
+textFile()    
+hadoopFile…    
+hadoopFile...      
+sequenceFile…    
+sequenceFile…    
+objectFile…    
+hadoopRDD…    
+
+兼容新版本Hadoop API的创建操作
+newAPIHadoopFile…  
+newAPIHadoopFile…  
+newAPIHadoopRDD…
+
 
 **3.转换操作（transformation operation）**   
-将一个RDD*通过一定的操作*变换成另一个RDD。
+将一个RDD*通过一定的操作*变换成另一个RDD。          
+**(1)RDD基本转换操作**   
+map()   将RDD中类型为T的元素，一对一地映射为类型为U的元素  
+distinct()  返回RDD中所有不一样的元素  
+flatMap()  将RDD中的每一个元素进行*一对多*转换  
+  
+repartition()   是coalesce接口中shuffle为true的简易实现  
+coalesce()    对RDD的分区进行重新划分  
+
+randomSplit()  根据weights权重将一个RDD切分成多个RDD  
+glom()  将RDD中每一个分区中类型为T的元素转换成数组Array[T]，这样每个分区就只有一个数组元素  
+
+union()  针对RDD的集合操作  
+intersection()  
+intersection()  
+subtract()  
+subtract()  
+
+mapPartitions()  与map转换操作类似，只不过映射函数的输入参数由RDD中的每一个元素变成了RDD中每一个分区的迭代器  
+mapPartitionsWithIndex()  
+
+zip(…)  将两个RDD组合成Key/Value形式的RDD
+zipPartitions(…)  将多个RDD按照partition组合成为新的RDD
+zipPartitions(…)   
+zipPartitions(…)  
+zipPartitions(…)  
+zipPartitions(…)  
+zipPartitions(…)  
+
+zipWithIndex()  将RDD中的元素和这个元素的ID组合成键/值对
+zipWithUniqueId()  将RDD中的元素和一个唯一ID组合成键/值对
+
+**(2)键值RDD转换操作**
+partitionBy()  根据partitioner函数生成新的ShuffledRDD，将原RDD重新分区
+mapValues()  针对[K,V]中的V值进行map操作
+flatMapValues()  针对[K,V]中的V值进行flatMap操作
+
+combineByKey(…) 将RDD[K,V]转化成返回类型RDD[K,C],这里V类型与C类型可以相同也可以不同  
+combineByKey(…)  
+combineByKey(…)  
+foldByKey(…)  
+foldByKey(…)  
+foldByKey(…)  
+reduceByKey(…)  
+reduceByKey(…)  
+reduceByKey(…)  
+groupByKey(…)  
+groupByKey(…)  
+groupByKey(…)  
+
+cogroup(…)  
+cogroup(…)  
+cogroup(…)  
+join(…)  针对RDD[K,V]中K值相等的连接操作，内连接  
+join(…)  
+join(…)  
+leftOuterJoin(…)  针对RDD[K,V]中K值相等的连接操作，左外连接  
+leftOuterJoin(…)  
+leftOuterJoin(…)  
+rightOuterJoin(…)   针对RDD[K,V]中K值相等的连接操作，右外连接  
+rightOuterJoin(…)  
+rightOuterJoin(…)  
+subtractByKey(…)  只是针对RDD[K,V]中K值来进行操作  
+subtractByKey(…)  
+subtractByKey(…)  
 
 **4.控制操作  （control operation）**  
 对RDD进行持久化，可以*让RDD保存在磁盘或者内存中*，以便后续重复使用。  
@@ -125,7 +206,6 @@ partitioner这个属性，只存在于（K,V）类型的RDD中，对于非（K,V
 
 
 
-
 <!-- markdown end -->
 </div>
 <div class="entry" id="main">
@@ -138,10 +218,90 @@ partitioner这个属性，只存在于（K,V）类型的RDD中，对于非（K,V
 RDD的<em>初始创建都是由SparkContext来负责</em>的，将内存中的集合或者外部文件系统作为输入源。 <br>
 <strong>(1)集合创建操作</strong> <br>
 Spark中提供了parallelize和makeRDD两类函数来实现从集合生成RDD（两者不同之处，makeRDD还提供了一个可以指定每一个分区preferredLocations参数的实现版本） <br>
-<strong>(2)存储创建操作</strong>  </p>
+<strong>(2)存储创建操作</strong> <br>
+Spark的整个生态系统与Hadoop是完全兼容的，所以对于Hadoop所支持的文件类型或者数据库类型，Spark也同样支持。 <br>
+由于Hadoop的API有新旧两个版本，Spark为了能够兼容Hadoop所有版本，也提供了两套创建操作接口。 
+对于外部存储创建操作而言，hadoopRDD和newHadoopRDD是最为抽象的两个函数接口。
+兼容旧版本Hadoop API的创建操作
+textFile() <br>
+hadoopFile… <br>
+hadoopFile... <br>
+sequenceFile… <br>
+sequenceFile… <br>
+objectFile… <br>
+hadoopRDD…    </p>
+
+<p>兼容新版本Hadoop API的创建操作
+newAPIHadoopFile… <br>
+newAPIHadoopFile… <br>
+newAPIHadoopRDD…</p>
 
 <p><strong>3.转换操作（transformation operation）</strong> <br>
-将一个RDD<em>通过一定的操作</em>变换成另一个RDD。</p>
+将一个RDD<em>通过一定的操作</em>变换成另一个RDD。 <br>
+<strong>(1)RDD基本转换操作</strong> <br>
+map()   将RDD中类型为T的元素，一对一地映射为类型为U的元素 <br>
+distinct()  返回RDD中所有不一样的元素 <br>
+flatMap()  将RDD中的每一个元素进行<em>一对多</em>转换  </p>
+
+<p>repartition()   是coalesce接口中shuffle为true的简易实现 <br>
+coalesce()    对RDD的分区进行重新划分  </p>
+
+<p>randomSplit()  根据weights权重将一个RDD切分成多个RDD <br>
+glom()  将RDD中每一个分区中类型为T的元素转换成数组Array[T]，这样每个分区就只有一个数组元素  </p>
+
+<p>union()  针对RDD的集合操作 <br>
+intersection() <br>
+intersection() <br>
+subtract() <br>
+subtract()  </p>
+
+<p>mapPartitions()  与map转换操作类似，只不过映射函数的输入参数由RDD中的每一个元素变成了RDD中每一个分区的迭代器 <br>
+mapPartitionsWithIndex()  </p>
+
+<p>zip(…)  将两个RDD组合成Key/Value形式的RDD
+zipPartitions(…)  将多个RDD按照partition组合成为新的RDD
+zipPartitions(…) <br>
+zipPartitions(…) <br>
+zipPartitions(…) <br>
+zipPartitions(…) <br>
+zipPartitions(…)  </p>
+
+<p>zipWithIndex()  将RDD中的元素和这个元素的ID组合成键/值对
+zipWithUniqueId()  将RDD中的元素和一个唯一ID组合成键/值对</p>
+
+<p><strong>(2)键值RDD转换操作</strong>
+partitionBy()  根据partitioner函数生成新的ShuffledRDD，将原RDD重新分区
+mapValues()  针对[K,V]中的V值进行map操作
+flatMapValues()  针对[K,V]中的V值进行flatMap操作</p>
+
+<p>combineByKey(…) 将RDD[K,V]转化成返回类型RDD[K,C],这里V类型与C类型可以相同也可以不同 <br>
+combineByKey(…) <br>
+combineByKey(…) <br>
+foldByKey(…) <br>
+foldByKey(…) <br>
+foldByKey(…) <br>
+reduceByKey(…) <br>
+reduceByKey(…) <br>
+reduceByKey(…) <br>
+groupByKey(…) <br>
+groupByKey(…) <br>
+groupByKey(…)  </p>
+
+<p>cogroup(…) <br>
+cogroup(…) <br>
+cogroup(…) <br>
+join(…)  针对RDD[K,V]中K值相等的连接操作，内连接 <br>
+join(…) <br>
+join(…) <br>
+leftOuterJoin(…)  针对RDD[K,V]中K值相等的连接操作，左外连接 <br>
+leftOuterJoin(…) <br>
+leftOuterJoin(…) <br>
+rightOuterJoin(…)   针对RDD[K,V]中K值相等的连接操作，右外连接 <br>
+rightOuterJoin(…) <br>
+rightOuterJoin(…) <br>
+subtractByKey(…)  只是针对RDD[K,V]中K值来进行操作 <br>
+subtractByKey(…) <br>
+subtractByKey(…)  </p>
 
 <p><strong>4.控制操作  （control operation）</strong> <br>
 对RDD进行持久化，可以<em>让RDD保存在磁盘或者内存中</em>，以便后续重复使用。  </p>
