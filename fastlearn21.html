@@ -1,0 +1,356 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+《十二步学会Scala》2
+
+本文是《十二步学会Scala》的第二篇，介绍了如何运行Scala脚本，Scala的循环和判断，以及很重要的数组的定义、赋值与读取。
+
+第五步：运行脚本
+
+Scala是一个动态性很强的语言，所以它也像Ruby那样，能够写脚本运行。
+
+
+第六步： 循环用while, 判断用if
+
+写个把输入的参数字符逐个打印出来的小脚本，printargs.scala
+var i = 0 
+while (i < args.length) {  
+println(args(i))  
+i += 1 
+} 
+while循环体外定义一个可变的变量i,在循环体内每次加一，直到传入的参数全部打印完毕。
+注意，Scala中不能用i++或++i
+
+定义一个取最大值的方法max
+scala> def max(x: Int, y: Int): Int = if(x < y) y else x  
+max: (Int,Int)Int
+
+第七步：用foreach和for进行迭代
+  
+建个文本文件，叫pa.scala，里面写上
+args.foreach(arg => println(arg)) 
+
+arg是迭代变量，不需要手工赋值，编译器会把传递给它。同时编译器会认出arg的类型，所以这里不需要定义类型。
+
+但我觉得如果类型不是一目了然的情况下，最好是定义一下类型，可以使阅读代码的人很轻松。
+
+把arg定义上类型
+
+pa.scala
+
+args.foreach((arg: String) => println(arg)) 
+注意当给变量定义类型的时候，必须要加括号！
+
+
+这里传给foreach的实际上就是一个匿名方法！
+
+匿名方法的定义是这样的：方法参数 => 方法体
+我们这个传入的匿名方法就是：(arg: String) => println(arg)
+
+for迭代，可以做更多的事情，但这里只介绍一下它的简单用法。
+
+用Scala的for来实现
+
+for (arg <- args)  
+println(arg) 
+
+左箭头<-可以读成in
+
+在Scala，如果一句话是一行，可以省略分号；如果多个语句放在一行，用分号隔开。
+
+第八步： 数组
+建个文本文件，叫paramswithvalues.scala
+
+val greetStrings = new Array[String](3)  //定义数组类型
+ 
+greetStrings(0) = "Hello"  //数组元素赋值
+greetStrings(1) = ", " 
+greetStrings(2) = "world!\n" 
+ 
+for (i <- 0 to 2)  
+print(greetStrings(i))  //数组元素读取
+
+----
+
+greetStrings(0) = "Hello"  //数组元素赋值
+
+Scala用小括号代替java的中括号，
+Scala里所以东西都是对象，数组也不例外。数组赋值其实也是一个方法完成的。
+
+上面的代码会被编译器转换成两个参数的方法：
+
+Scala代码
+
+greetStrings.update(0, "Hello")   
+当然你也直接这样写上面的赋值：
+
+Scala代码
+
+greetStrings.update(0, "Hello")    
+greetStrings.update(1, ", ")    
+greetStrings.update(2, "world!\n") 
+------------
+
+print(greetStrings(i))   //数组元素读取
+为什么Scala不用中括号呢？是因为Scala有一套通用规则，会把小括号转换成apply。
+
+所以编译器会得到这样的代码：
+
+Scala代码
+
+print(greetStrings.apply(i))  
+---------------
+如果不使用符号，我们的代码同样可以完成：
+
+Scala代码
+
+val greetStrings = new Array[String](3)    
+    
+greetStrings.update(0, "Hello")    
+greetStrings.update(1, ", ")    
+greetStrings.update(2, "world!\n")    
+    
+for (i <- 0.to(2))    
+  print(greetStrings.apply(i))   
+--
+当方法参数只有一个的时候，可以不写括号和点，
+
+所以第一循环是这样写就够了：
+
+Scala代码
+
+for (i <- 0 to 2)  
+--
+to是0的一个方法，
+
+Scala代码
+
+for (i <- 0.to(2))   
+
+第九步：使用Lists和Tuples
+
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p>《十二步学会Scala》2</p>
+
+<p>本文是《十二步学会Scala》的第二篇，介绍了如何运行Scala脚本，Scala的循环和判断，以及很重要的数组的定义、赋值与读取。</p>
+
+<p>第五步：运行脚本</p>
+
+<p>Scala是一个动态性很强的语言，所以它也像Ruby那样，能够写脚本运行。</p>
+
+<p>第六步： 循环用while, 判断用if</p>
+
+<p>写个把输入的参数字符逐个打印出来的小脚本，printargs.scala
+var i = 0 
+while (i &lt; args.length) { <br>
+println(args(i)) <br>
+i += 1 
+} 
+while循环体外定义一个可变的变量i,在循环体内每次加一，直到传入的参数全部打印完毕。
+注意，Scala中不能用i++或++i</p>
+
+<p>定义一个取最大值的方法max
+scala&gt; def max(x: Int, y: Int): Int = if(x &lt; y) y else x <br>
+max: (Int,Int)Int</p>
+
+<p>第七步：用foreach和for进行迭代</p>
+
+<p>建个文本文件，叫pa.scala，里面写上
+args.foreach(arg =&gt; println(arg)) </p>
+
+<p>arg是迭代变量，不需要手工赋值，编译器会把传递给它。同时编译器会认出arg的类型，所以这里不需要定义类型。</p>
+
+<p>但我觉得如果类型不是一目了然的情况下，最好是定义一下类型，可以使阅读代码的人很轻松。</p>
+
+<p>把arg定义上类型</p>
+
+<p>pa.scala</p>
+
+<p>args.foreach((arg: String) =&gt; println(arg)) 
+注意当给变量定义类型的时候，必须要加括号！</p>
+
+<p>这里传给foreach的实际上就是一个匿名方法！</p>
+
+<p>匿名方法的定义是这样的：方法参数 =&gt; 方法体
+我们这个传入的匿名方法就是：(arg: String) =&gt; println(arg)</p>
+
+<p>for迭代，可以做更多的事情，但这里只介绍一下它的简单用法。</p>
+
+<p>用Scala的for来实现</p>
+
+<p>for (arg &lt;- args) <br>
+println(arg) </p>
+
+<p>左箭头&lt;-可以读成in</p>
+
+<p>在Scala，如果一句话是一行，可以省略分号；如果多个语句放在一行，用分号隔开。</p>
+
+<p>第八步： 数组
+建个文本文件，叫paramswithvalues.scala</p>
+
+<p>val greetStrings = new Array<a href="3">String</a>  //定义数组类型</p>
+
+<p>greetStrings(0) = "Hello"  //数组元素赋值
+greetStrings(1) = ", " 
+greetStrings(2) = "world!\n" </p>
+
+<p>for (i &lt;- 0 to 2) <br>
+print(greetStrings(i))  //数组元素读取</p>
+
+<hr>
+
+<p>greetStrings(0) = "Hello"  //数组元素赋值</p>
+
+<p>Scala用小括号代替java的中括号，
+Scala里所以东西都是对象，数组也不例外。数组赋值其实也是一个方法完成的。</p>
+
+<p>上面的代码会被编译器转换成两个参数的方法：</p>
+
+<p>Scala代码</p>
+
+<p>greetStrings.update(0, "Hello") <br>
+当然你也直接这样写上面的赋值：</p>
+
+<p>Scala代码</p>
+
+<p>greetStrings.update(0, "Hello") <br>
+greetStrings.update(1, ", ")    </p>
+
+<h2 id="greetstringsupdate2worldn">greetStrings.update(2, "world!\n") </h2>
+
+<p>print(greetStrings(i))   //数组元素读取
+为什么Scala不用中括号呢？是因为Scala有一套通用规则，会把小括号转换成apply。</p>
+
+<p>所以编译器会得到这样的代码：</p>
+
+<p>Scala代码</p>
+
+<h2 id="printgreetstringsapplyi">print(greetStrings.apply(i))  </h2>
+
+<p>如果不使用符号，我们的代码同样可以完成：</p>
+
+<p>Scala代码</p>
+
+<p>val greetStrings = new Array<a href="3">String</a>    </p>
+
+<p>greetStrings.update(0, "Hello") <br>
+greetStrings.update(1, ", ") <br>
+greetStrings.update(2, "world!\n")    </p>
+
+<p>for (i &lt;- 0.to(2))    </p>
+
+<h2 id="printgreetstringsapplyi">  print(greetStrings.apply(i))   </h2>
+
+<p>当方法参数只有一个的时候，可以不写括号和点，</p>
+
+<p>所以第一循环是这样写就够了：</p>
+
+<p>Scala代码</p>
+
+<h2 id="fori0to2">for (i &lt;- 0 to 2)  </h2>
+
+<p>to是0的一个方法，</p>
+
+<p>Scala代码</p>
+
+<p>for (i &lt;- 0.to(2))   </p>
+
+<p>第九步：使用Lists和Tuples</p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "fastlearn21.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
