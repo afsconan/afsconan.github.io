@@ -30,7 +30,10 @@
 **1.弹性分布式数据集RDD（Resilient Distributed DataSets）**
 
 **2.创建操作（creation operation）**  
-RDD的*初始创建都是由SparkContext来负责*的，将内存中的集合或者外部文件系统作为输入源。
+RDD的*初始创建都是由SparkContext来负责*的，将内存中的集合或者外部文件系统作为输入源。  
+**(1)集合创建操作**  
+Spark中提供了parallelize和makeRDD两类函数来实现从集合生成RDD（两者不同之处，makeRDD还提供了一个可以指定每一个分区preferredLocations参数的实现版本）   
+**(2)存储创建操作**  
 
 **3.转换操作（transformation operation）**   
 将一个RDD*通过一定的操作*变换成另一个RDD。
@@ -100,19 +103,18 @@ saveAsNewAPIHadoopDataset(conf:Configuration)
 可以指定多少分区，也可以不指定（采用系统默认的分区数----程序所分配到的资源的CPU核的个数）  
 **2.RDD优先位置（preferredLocations）**   
 preferredLocations返回每一个数据块所在的机器名或者 IP地址（如果每一块数据是多份存储的，那么就会返回多个机器地址）  
-**3.RDD依赖关系（dependencies）**    
+**3.RDD依赖关系（dependencies）** &emsp; PageRank算法的例子[多看]  
 *窄依赖*：每一个父RDD的分区最多只被子RDD的一个分区所使用。  
 *宽依赖*：多个子RDD的分区会依赖于同一个父RDD的分区。   
 org.apache.spark.*OneToOneDependency*（窄依赖）
 org.apache.spark.*ShuffleDependency* （宽依赖）  
-**4.RDD区分计算（compute）**   
+**4.RDD分区计算（compute）**   
 对于Spark中每个RDD的计算都是以partition(分区)为单位的，而且RDD中的compute函数都是在对迭代器进行复合，不需要保存每次计算的结果。    
-**5.RDD分区函数（partitioner）**    
+**5.RDD分区函数（partitioner）**   &emsp; PageRank优化[多看]     
 目前在Spark中实现了两种类型的分区函数：
 HashPatitioner（哈希分区）和RangePatitioner（区域分区）
 
 partitioner这个属性，只存在于（K,V）类型的RDD中，对于非（K,V）类型的partitioner的值就是None。
-
 
 
 
@@ -133,7 +135,10 @@ partitioner这个属性，只存在于（K,V）类型的RDD中，对于非（K,V
 <p><strong>1.弹性分布式数据集RDD（Resilient Distributed DataSets）</strong></p>
 
 <p><strong>2.创建操作（creation operation）</strong> <br>
-RDD的<em>初始创建都是由SparkContext来负责</em>的，将内存中的集合或者外部文件系统作为输入源。</p>
+RDD的<em>初始创建都是由SparkContext来负责</em>的，将内存中的集合或者外部文件系统作为输入源。 <br>
+<strong>(1)集合创建操作</strong> <br>
+Spark中提供了parallelize和makeRDD两类函数来实现从集合生成RDD（两者不同之处，makeRDD还提供了一个可以指定每一个分区preferredLocations参数的实现版本） <br>
+<strong>(2)存储创建操作</strong>  </p>
 
 <p><strong>3.转换操作（transformation operation）</strong> <br>
 将一个RDD<em>通过一定的操作</em>变换成另一个RDD。</p>
@@ -199,14 +204,14 @@ saveAsNewAPIHadoopDataset(conf:Configuration)  </p>
 可以指定多少分区，也可以不指定（采用系统默认的分区数----程序所分配到的资源的CPU核的个数） <br>
 <strong>2.RDD优先位置（preferredLocations）</strong> <br>
 preferredLocations返回每一个数据块所在的机器名或者 IP地址（如果每一块数据是多份存储的，那么就会返回多个机器地址） <br>
-<strong>3.RDD依赖关系（dependencies）</strong> <br>
+<strong>3.RDD依赖关系（dependencies）</strong>   PageRank算法的例子[多看] <br>
 <em>窄依赖</em>：每一个父RDD的分区最多只被子RDD的一个分区所使用。 <br>
 <em>宽依赖</em>：多个子RDD的分区会依赖于同一个父RDD的分区。 <br>
 org.apache.spark.<em>OneToOneDependency</em>（窄依赖）
 org.apache.spark.<em>ShuffleDependency</em> （宽依赖） <br>
-<strong>4.RDD区分计算（compute）</strong> <br>
+<strong>4.RDD分区计算（compute）</strong> <br>
 对于Spark中每个RDD的计算都是以partition(分区)为单位的，而且RDD中的compute函数都是在对迭代器进行复合，不需要保存每次计算的结果。 <br>
-<strong>5.RDD分区函数（partitioner）</strong> <br>
+<strong>5.RDD分区函数（partitioner）</strong>     PageRank优化[多看] <br>
 目前在Spark中实现了两种类型的分区函数：
 HashPatitioner（哈希分区）和RangePatitioner（区域分区）</p>
 
