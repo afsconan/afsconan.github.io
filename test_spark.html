@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+[把Spark安装包下的”README.txt”上传到](http://book.51cto.com/art/201408/448472.htm)
+
+通过hdfs的web控制台可以发现成功上传了文件：
+
+使用“MASTER:spark://SparkMaster:7077 ./spark-shell”命令启动Spark shell：
+
+
+[接下来通过以下命令读取刚刚上传到HDFS上的“README.md”文件:](http://book.51cto.com/art/201408/448473.htm)
+
+![](http://s2.51cto.com/wyfs02/M02/46/1E/wKioL1Pt1hPAST8_AABdf9sYPzE269.jpg)
+
+对读取的文件进行以下操作：
+![](http://s9.51cto.com/wyfs02/M00/46/1D/wKiom1Pt1QSztm-5AABBjnH67vQ021.jpg)
+
+接下来使用collect命令提交并执行Job：
+![](http://s9.51cto.com/wyfs02/M00/46/1E/wKioL1Pt1jOSGBXpAADrU6zHGh8391.jpg)
+
+从控制台可以看到我们的程序成功在集群上运行：
+![](http://s9.51cto.com/wyfs02/M02/46/1D/wKiom1Pt1UeiQWWmAABeNM5zADA965.jpg)
+
+
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p><a href="http://book.51cto.com/art/201408/448472.htm">把Spark安装包下的”README.txt”上传到</a></p>
+
+<p>通过hdfs的web控制台可以发现成功上传了文件：</p>
+
+<p>使用“MASTER:spark://SparkMaster:7077 ./spark-shell”命令启动Spark shell：</p>
+
+<p><a href="http://book.51cto.com/art/201408/448473.htm">接下来通过以下命令读取刚刚上传到HDFS上的“README.md”文件:</a></p>
+
+<p><img src="http://s2.51cto.com/wyfs02/M02/46/1E/wKioL1Pt1hPAST8_AABdf9sYPzE269.jpg" alt="" title=""></p>
+
+<p>对读取的文件进行以下操作：
+<img src="http://s9.51cto.com/wyfs02/M00/46/1D/wKiom1Pt1QSztm-5AABBjnH67vQ021.jpg" alt="" title=""></p>
+
+<p>接下来使用collect命令提交并执行Job：
+<img src="http://s9.51cto.com/wyfs02/M00/46/1E/wKioL1Pt1jOSGBXpAADrU6zHGh8391.jpg" alt="" title=""></p>
+
+<p>从控制台可以看到我们的程序成功在集群上运行：
+<img src="http://s9.51cto.com/wyfs02/M02/46/1D/wKiom1Pt1UeiQWWmAABeNM5zADA965.jpg" alt="" title=""></p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "test_spark.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
