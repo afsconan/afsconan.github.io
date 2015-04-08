@@ -45,6 +45,10 @@ hadoop􏰇􏰈􏰉/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.6.0.jar
 
 然后输出为jar包。File -> Export -> Java -> JAR File。然后点击next。选中WordCount源文 件, 设置输出路径和文件名WordCount.jar, 选择Finish则打包成功。
 
+－－－－－－－－－－－
+现在需要计算的数据已经存储到hdfs的input里了,并且wordcount.jar包也有了,接下来就开始执行这个jar包。首先,仍然要切换到hadoop主目录下,然后执行以下命令:  
+
+bin/hadoop jar /Users/Jas/Project/Eclipse/Hadoop/wordcount.jar wordcount /user/input /user/output
 <!-- markdown end -->
 </div>
 <div class="entry" id="main">
@@ -67,6 +71,11 @@ hadoop􏰇􏰈􏰉/share/hadoop/common/hadoop-common-2.6.0.jar 以及 <br>
 hadoop􏰇􏰈􏰉/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.6.0.jar  </p>
 
 <p>然后输出为jar包。File -&gt; Export -&gt; Java -&gt; JAR File。然后点击next。选中WordCount源文 件, 设置输出路径和文件名WordCount.jar, 选择Finish则打包成功。</p>
+
+<p>－－－－－－－－－－－
+现在需要计算的数据已经存储到hdfs的input里了,并且wordcount.jar包也有了,接下来就开始执行这个jar包。首先,仍然要切换到hadoop主目录下,然后执行以下命令:  </p>
+
+<p>bin/hadoop jar /Users/Jas/Project/Eclipse/Hadoop/wordcount.jar wordcount /user/input /user/output</p>
 <!-- content end -->
 </div>
 <br>
