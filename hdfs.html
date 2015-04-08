@@ -34,7 +34,17 @@ Job job = new Job(conf);
 /* 删除输出目录 */  
 Path outputPath = new Path(args[1]);  
 outputPath.getFileSystem(conf).delete(outputPath, true);  
-... 
+...     
+———————————
+
+首先去Eclipse官网下载 Eclipse IDE for Java Developers 的Mac OS X 64 Bit版本。  
+然后新建一个项目,然后 Project Properties -> Java Build Path -> Libraries -> Add External Jars 。这里需要添加两个jar包,都在hadoop主目录里。分别是:  
+hadoop􏰇􏰈􏰉/share/hadoop/common/hadoop-common-2.6.0.jar 以及  
+hadoop􏰇􏰈􏰉/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.6.0.jar  
+
+
+然后输出为jar包。File -> Export -> Java -> JAR File。然后点击next。选中WordCount源文 件, 设置输出路径和文件名WordCount.jar, 选择Finish则打包成功。
+
 <!-- markdown end -->
 </div>
 <div class="entry" id="main">
@@ -48,7 +58,15 @@ Job job = new Job(conf); <br>
 /* 删除输出目录 */ <br>
 Path outputPath = new Path(args[1]); <br>
 outputPath.getFileSystem(conf).delete(outputPath, true); <br>
-... </p>
+... <br>
+———————————</p>
+
+<p>首先去Eclipse官网下载 Eclipse IDE for Java Developers 的Mac OS X 64 Bit版本。 <br>
+然后新建一个项目,然后 Project Properties -&gt; Java Build Path -&gt; Libraries -&gt; Add External Jars 。这里需要添加两个jar包,都在hadoop主目录里。分别是: <br>
+hadoop􏰇􏰈􏰉/share/hadoop/common/hadoop-common-2.6.0.jar 以及 <br>
+hadoop􏰇􏰈􏰉/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.6.0.jar  </p>
+
+<p>然后输出为jar包。File -&gt; Export -&gt; Java -&gt; JAR File。然后点击next。选中WordCount源文 件, 设置输出路径和文件名WordCount.jar, 选择Finish则打包成功。</p>
 <!-- content end -->
 </div>
 <br>
