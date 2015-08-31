@@ -1,0 +1,365 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+##基础实验楼集群（JC）    
+
+硬件平台  
+
+========================================
+
+masters: (simple37)    
+\>>>NameNode, ResourceManager， sparkMaster  
+CPU: 2 x Intel(R) Xeon(R) E5-2620 v2 @ 2.10GHz /15M Cache 6-Core 12-Thread       
+Memory: 128GB Memory (16x8GB) 1600MHz      
+Disk: 600GBx2 3.5-inch with RAID-1       
+  
+slaves: (simple21-36)  
+16个结点  
+CPU: 2 x Intel(R) Xeon(R) E5-2620 v2 @ 2.10GHz /15M Cache 6-Core 12-Thread       
+Memory: 32GB (4x8GB) 1600MHz      
+Disk: 2TBx2 3.5-inch with RAID-1 (simple29上只有一块2TB硬盘)      
+
+软件平台
+
+========================================  
+CentOS 7.0  
+OracleJava 7u79 &OpenJdk1.7.0_79  
+Hadoop-2.4.1  
+Spark1.4.0 
+  
+校园网地址  
+
+========================================  
+114.212.10.37 (simple37)        
+目前仅限于校园网内访问    
+
+
+##国际学院集群1（GJ-1）
+
+
+硬件平台
+
+========================================  
+masters: (master01)      
+\>>>NameNode, ResourceManager， sparkMaster    
+CPU: 2 x Intel® Xeon® Processor E5-2660 v2 (25M Cache, 2.20 GHz) 10-Core 20-Thread     
+Memory: 128GB Memory (16x8GB) 1866MHz    
+Disk: sas controller 6TB raid0    
+
+slaves: (slave001-slave040)    
+40个结点  
+CPU: 2 x Intel(R) Xeon(R) E5-2620 v2 @ 2.10GHz /15M Cache 6-Core 12-Thread   
+Memory: 64GB (8x8GB) 1866MHz  
+Disk: sas controller 6TB raid0  
+
+软件平台
+
+========================================  
+Redhat Enterpreise Linux Server 7.0  
+OracleJava 7u79 &OpenJdk1.7.0_79  
+Hadoop-2.4.1  
+Spark1.4.0  
+
+校园网地址 
+
+========================================  
+210.28.132.11 (master01)  
+目前仅限于校园网内访问
+
+ 
+
+##国际学院集群2（GJ-2）
+
+
+硬件平台
+
+========================================  
+masters: (master02)    
+\>>>NameNode, ResourceManager， sparkMaster  
+CPU: 2 x Intel® Xeon® Processor E5-2660 v2 (25M Cache, 2.20 GHz) 10-Core 20-Thread   
+Memory: 128GB Memory (16x8GB) 1866MHz  
+Disk: sas controller 6TB raid0  
+ssd：128GB  
+
+slaves: (slave201-slave226)  
+26个结点,外借待归还4个节点  
+CPU: 2 x Intel(R) Xeon(R) E5-2620 v2 @ 2.10GHz /15M Cache 6-Core 12-Thread   
+Memory: 64GB (8x8GB) 1866MHz  
+Disk: sas controller 6TB raid0  
+ssd：400GB  
+
+软件平台
+
+========================================     
+Redhat Enterpreise Linux Server 7.0  
+OracleJava 7u79 &OpenJdk1.7.0_79  
+Hadoop-2.4.1  
+Spark1.4.0  
+
+校园网地址  
+
+========================================    
+210.28.132.12 (master02)  
+目前仅限于校园网内访问  
+
+##国际学院集群3（GJ-3）  
+
+
+硬件平台
+
+========================================  
+masters: (master03)  
+\>>>NameNode, ResourceManager， sparkMaster  
+CPU: 2 x Intel® Xeon® Processor E5-2650 v2 (20M Cache, 2.60 GHz) 8-Core 16-Thread   
+Memory: 192GB Memory (12x16GB) 1866MHz  
+Disk: sas controller 3TB raid0  
+ssd：128GB  
+
+slaves: (slave101-slave110)  
+10个结点  
+CPU: 2 x Intel(R) Xeon(R) E5-2620 v2 @ 2.10GHz /15M Cache 6-Core 12-Thread   
+Memory: 64GB (8x8GB) 1866MHz  
+Disk: sas controller 8TB raid0  
+ssd：200GB  
+
+软件平台
+
+========================================    
+Redhat Enterpreise Linux Server 7.0    
+OracleJava 7u79 &OpenJdk1.7.0_79    
+Hadoop-2.4.1    
+Spark1.4.0    
+
+校园网地址
+
+========================================  
+210.28.132.13 (master03)  
+目前仅限于校园网内访问  
+
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<h2 id="jc">基础实验楼集群（JC）</h2>
+
+<p>硬件平台  </p>
+
+<p>========================================</p>
+
+<p>masters: (simple37) <br>
+&gt;&gt;&gt;NameNode, ResourceManager， sparkMaster <br>
+CPU: 2 x Intel(R) Xeon(R) E5-2620 v2 @ 2.10GHz /15M Cache 6-Core 12-Thread <br>
+Memory: 128GB Memory (16x8GB) 1600MHz <br>
+Disk: 600GBx2 3.5-inch with RAID-1       </p>
+
+<p>slaves: (simple21-36) <br>
+16个结点 <br>
+CPU: 2 x Intel(R) Xeon(R) E5-2620 v2 @ 2.10GHz /15M Cache 6-Core 12-Thread <br>
+Memory: 32GB (4x8GB) 1600MHz <br>
+Disk: 2TBx2 3.5-inch with RAID-1 (simple29上只有一块2TB硬盘)      </p>
+
+<p>软件平台</p>
+
+<p>======================================== <br>
+CentOS 7.0 <br>
+OracleJava 7u79 &amp;OpenJdk1.7.0_79 <br>
+Hadoop-2.4.1 <br>
+Spark1.4.0 </p>
+
+<p>校园网地址  </p>
+
+<p>======================================== <br>
+114.212.10.37 (simple37) <br>
+目前仅限于校园网内访问    </p>
+
+<h2 id="1gj1">国际学院集群1（GJ-1）</h2>
+
+<p>硬件平台</p>
+
+<p>======================================== <br>
+masters: (master01) <br>
+&gt;&gt;&gt;NameNode, ResourceManager， sparkMaster <br>
+CPU: 2 x Intel® Xeon® Processor E5-2660 v2 (25M Cache, 2.20 GHz) 10-Core 20-Thread <br>
+Memory: 128GB Memory (16x8GB) 1866MHz <br>
+Disk: sas controller 6TB raid0    </p>
+
+<p>slaves: (slave001-slave040) <br>
+40个结点 <br>
+CPU: 2 x Intel(R) Xeon(R) E5-2620 v2 @ 2.10GHz /15M Cache 6-Core 12-Thread <br>
+Memory: 64GB (8x8GB) 1866MHz <br>
+Disk: sas controller 6TB raid0  </p>
+
+<p>软件平台</p>
+
+<p>======================================== <br>
+Redhat Enterpreise Linux Server 7.0 <br>
+OracleJava 7u79 &amp;OpenJdk1.7.0_79 <br>
+Hadoop-2.4.1 <br>
+Spark1.4.0  </p>
+
+<p>校园网地址 </p>
+
+<p>======================================== <br>
+210.28.132.11 (master01) <br>
+目前仅限于校园网内访问</p>
+
+<h2 id="2gj2">国际学院集群2（GJ-2）</h2>
+
+<p>硬件平台</p>
+
+<p>======================================== <br>
+masters: (master02) <br>
+&gt;&gt;&gt;NameNode, ResourceManager， sparkMaster <br>
+CPU: 2 x Intel® Xeon® Processor E5-2660 v2 (25M Cache, 2.20 GHz) 10-Core 20-Thread <br>
+Memory: 128GB Memory (16x8GB) 1866MHz <br>
+Disk: sas controller 6TB raid0 <br>
+ssd：128GB  </p>
+
+<p>slaves: (slave201-slave226) <br>
+26个结点,外借待归还4个节点 <br>
+CPU: 2 x Intel(R) Xeon(R) E5-2620 v2 @ 2.10GHz /15M Cache 6-Core 12-Thread <br>
+Memory: 64GB (8x8GB) 1866MHz <br>
+Disk: sas controller 6TB raid0 <br>
+ssd：400GB  </p>
+
+<p>软件平台</p>
+
+<p>======================================== <br>
+Redhat Enterpreise Linux Server 7.0 <br>
+OracleJava 7u79 &amp;OpenJdk1.7.0_79 <br>
+Hadoop-2.4.1 <br>
+Spark1.4.0  </p>
+
+<p>校园网地址  </p>
+
+<p>======================================== <br>
+210.28.132.12 (master02) <br>
+目前仅限于校园网内访问  </p>
+
+<h2 id="3gj3">国际学院集群3（GJ-3）</h2>
+
+<p>硬件平台</p>
+
+<p>======================================== <br>
+masters: (master03) <br>
+&gt;&gt;&gt;NameNode, ResourceManager， sparkMaster <br>
+CPU: 2 x Intel® Xeon® Processor E5-2650 v2 (20M Cache, 2.60 GHz) 8-Core 16-Thread <br>
+Memory: 192GB Memory (12x16GB) 1866MHz <br>
+Disk: sas controller 3TB raid0 <br>
+ssd：128GB  </p>
+
+<p>slaves: (slave101-slave110) <br>
+10个结点 <br>
+CPU: 2 x Intel(R) Xeon(R) E5-2620 v2 @ 2.10GHz /15M Cache 6-Core 12-Thread <br>
+Memory: 64GB (8x8GB) 1866MHz <br>
+Disk: sas controller 8TB raid0 <br>
+ssd：200GB  </p>
+
+<p>软件平台</p>
+
+<p>======================================== <br>
+Redhat Enterpreise Linux Server 7.0 <br>
+OracleJava 7u79 &amp;OpenJdk1.7.0_79 <br>
+Hadoop-2.4.1 <br>
+Spark1.4.0    </p>
+
+<p>校园网地址</p>
+
+<p>======================================== <br>
+210.28.132.13 (master03) <br>
+目前仅限于校园网内访问  </p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "new_cluster.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+</body>
+</html>
