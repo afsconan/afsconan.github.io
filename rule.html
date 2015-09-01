@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+  
+在centos7中 /etc/environment和/etc/profile是所有用户的配置文件，
+而~/.bash_profile是每个用户的配置文件，用户环境变量就可以配置在这个文件中  
+
+个人账户中，禁止使用GUI的IDE。如果想使用IDE，请移步开发机
+
+
+典型应用：部署（而非开发）自己的项目，性能实验，扩展性实验。  
+如果有如下几个需求，请申请独占使用的方式：  
+1. 集群提供的公共服务不能满足需求，需要自己安装新的软件进行实验；  
+2. 对性能要求较高，不想被其他用户干扰。   
+
+ 
+
+1.独占使用中，用户使用experiment账号登录集群，请勿用其他账号使用独占节点。    
+请在交还独占节点之前确认重要数据已经备份。    
+因为我们在回收节点时首先会删除所有与experiment账号有关的内容。  
+如果是短时连续独占，请将自己的项目、配置等重要文件做好备份，方便快速部署。
+
+安装软件请安装在experiment账户的目录下。环境变量请配置在experiment账户的文件下。安装不干净的软件请使用docker。
+
+
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p>在centos7中 /etc/environment和/etc/profile是所有用户的配置文件，
+而~/.bash_profile是每个用户的配置文件，用户环境变量就可以配置在这个文件中  </p>
+
+<p>个人账户中，禁止使用GUI的IDE。如果想使用IDE，请移步开发机</p>
+
+<p>典型应用：部署（而非开发）自己的项目，性能实验，扩展性实验。 <br>
+如果有如下几个需求，请申请独占使用的方式： <br>
+1. 集群提供的公共服务不能满足需求，需要自己安装新的软件进行实验； <br>
+2. 对性能要求较高，不想被其他用户干扰。   </p>
+
+<p>1.独占使用中，用户使用experiment账号登录集群，请勿用其他账号使用独占节点。 <br>
+请在交还独占节点之前确认重要数据已经备份。 <br>
+因为我们在回收节点时首先会删除所有与experiment账号有关的内容。 <br>
+如果是短时连续独占，请将自己的项目、配置等重要文件做好备份，方便快速部署。</p>
+
+<p>安装软件请安装在experiment账户的目录下。环境变量请配置在experiment账户的文件下。安装不干净的软件请使用docker。</p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "rule.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+</body>
+</html>
