@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+首先给自己定下了几条规则：
+
+1. 每天必须写代码。可以写文档、博客或者其他的文章，但是必须要加进自己写的代码。   
+2. 代码必须是有用的。不要格式化、重构的代码。   
+3. 代码必须在午夜之前写好（为了避免不想熬夜而草率地写代码）。   
+4. 代码必须是开源的，且要放到Github上（这样强迫自己小心写代码，并会考虑代码重用性及怎么创建项目前期的模块）。  
+
+
+`利用最小化的时间写好代码`。我强迫自己每天花不少于半个小时来写代码（这真不是一件容易的事，尤其还得回忆前一天写了什么），在工作日期间一般不超过一个小时，但在周末我会花多一些时间做业余项目。
+
+`让写代码成为习惯`。要知道我并不关心自己在Github上的排名，因为我觉得做业余项目是自己的事，不要为了取悦别人而做。减肥和锻炼也是同样的道理，如果你不在乎提升自己，你永远都不会取得成功。
+
+`与不良情绪作斗争`。在开始实施每天写代码的计划前期，我时常焦虑项目没有很大的进展，毕竟业余项目没有时间限制。后来我意识到有这样的不良情绪对项目进展一点帮助都没有，反而会阻碍。所以要与不良情绪作斗争，现在我能心平气和地完成大量的工作，再也不会像以前那样为工作的事情忙得焦头烂额了。
+
+`安排、利用好周末时间`。对大多数人来说，利用周末时间做业余项目是项目取得大进展的绝好机会。而对于我来说，如果直到周末业余项目才能做好我会对自己很失望。之前我很少能完成所有自己想做的工作，这也就强迫自己不参加诸如参观博物馆、游公园等自己喜欢的周末娱乐活动，把时间留给工作。然而现在我强烈地意识到尽管业余项目很重要，但是也不应该忽略个人生活，所以学会安排时间很重要。
+
+`潜意识思考`。每天做业余项目写代码有一个有趣的副作用，那就是大脑会在潜意识里思考。因此，当我在散步、淋浴或从事其他非脑力活动时，我还在想着下一步代码该怎么写、出现问题了有什么解决的好方法，以前我每星期或者隔一个星期写一次代码从没出现过这样的情况。时间用来思考自然就不会再为业余项目取得的进展少而焦虑了。
+
+`每天写一点代码不易忘`。当接头做业余项目时总要付出“上下文切换”的代价，然而不幸的是思考是很难接上头的。所以我每天都做一点业余项目，让自己不容易忘记。
+
+`管理好时间，平衡工作、生活、业余项目`。现在的我已简单地学会了如何更好地维持工作、生活、业余项目的平衡，我知道自己每天都要做业余项目，所以我会更好地管理时间。如果我晚上有活动且很晚才能回家，那么我会在开始工作之前就做好当天的业余项目。假如当天的业余项目没有做完，那么不论多晚我都会完成，做到今日事今日毕。
+
+`要及时跟外界沟通`。当自己养成了新的习惯后跟外界沟通这是很有好处的。我的伙伴们都知道我每天写代码这个习惯，因此有活动安排时我会跟他们说：“等我写完代码再去。”他们一点都不会介意也很理解我的行为。
+
+`代码积少成多`。我很难相信自己在过去的几个月写了很多的代码。我新建了几个网站，重新写了框架并创建了大量节点模块。我已经写了这么多以至于有时我都忘记自己写了些什么，但是我真的很高兴我写了这么多的代码。
+
+好的习惯能带来巨大的成功，像每天写代码做业余项目这件事只要你坚持做下去，一定会有意想不到的效果。
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "code.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+</body>
+</html>
